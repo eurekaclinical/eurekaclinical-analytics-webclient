@@ -1,0 +1,5 @@
+{
+    "casLoginUrl": "https://localhost:8443/cas-server/login",
+    "logoutUrl": "https://localhost:8443/cas-server/logout",
+    "eurekaWebappUrl": "https://localhost:8443/eureka-webapp"
+}

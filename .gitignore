@@ -1,0 +1,12 @@
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+ng-docs
+node
+node_modules
+build
+bower_components
+npm-debug.log
+
