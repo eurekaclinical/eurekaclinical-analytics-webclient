@@ -30,7 +30,8 @@
 		</div>
 		<ol class="breadcrumb" ng-if="vm.tableParams">
 			<li class="breadcrumb-item" ng-repeat="x in vm.breadCrumbs"><a href ng-click="vm.setBreadCrumbs(x)">{{x.displayName}}</a></li>
-		</ol>
+		      </ol>
+		      <div id="conceptTable" style="max-height: 50vh; overflow-y: auto;">
 		<table ng-table="vm.tableParams" class="table" show-filter="true">
 			<thead class="hidden"/>
 			<tbody>
@@ -39,23 +40,25 @@
 						<span ng-if="user.parent === false">
 							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName}}
 						</span>
-						<a title="Edit" ng-click="vm.selectNode(user) " ng-if="user.parent===true">
+						<a title="Edit" ng-click="vm.selectNode(user) " ng-if="user.parent===true" style="cursor: pointer;">
 							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName}}
 						</a>
 					</td>
 					<td>
-						<a title="Edit" ng-click="vm.addNode(user) " class="add-node">
+						<a title="Edit" ng-click="vm.addNode(user) " class="add-node" style="cursor: pointer;">
 							<span class="glyphicon glyphicon-plus" title=""></span>
 						</a>
 					</td>
 				</tr>
 			</tbody>
-		</table>
+		      </table>
+		      </div>
 	</uib-tab>
 	<uib-tab index="1" heading="Phenotypes">
 		<div class="text-center" ng-if="!vm.tableParamsUser">
 			<i class="fa fa-refresh fa-spin"></i> Loading...
 		</div>
+		<div id="phenotypesTable" style="max-height: 50vh; overflow-y: auto;">
 		<table ng-table="vm.tableParamsUser" class="table" show-filter="true">
 			<thead class="hidden"/>
 			<tbody>
@@ -66,12 +69,13 @@
 						</span>
 					</td>
 					<td>
-						<a title="Edit" ng-click="vm.addUserNode(user1) " class="add-node">
+						<a title="Edit" ng-click="vm.addUserNode(user1) " class="add-node"  style="cursor: pointer;">
 							<span class="glyphicon glyphicon-plus" title=""></span>
 						</a>
 					</td>
 				</tr>
 			</tbody>
-		</table>
+		      </table>
+		      </div>
 	</uib-tab>
 </uib-tabset>
