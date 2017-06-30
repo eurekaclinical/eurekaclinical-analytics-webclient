@@ -21,13 +21,23 @@
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 		
 	    <link rel="stylesheet" type="text/css" href="https://assets.eurekaclinical.org/v2.0a1/css/eurekaclinical.css">
-		<style>
+<style>
+.drop {
+padding: 15px;
+border: 2px #ccc dashed;
+border-radius: 5px;
+line-height: 34px;
+}
 			.input-group-addon select {
 				font-size: 12px;
-			}
+}
+.drag-over {
+background: #4e82c6;
+color: #fff;
+}
 		</style>
     </head>
-    <body ng-cloak>
+    <body ng-cloak flow-prevent-drop>
 
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">

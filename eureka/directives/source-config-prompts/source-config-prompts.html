@@ -1,7 +1,19 @@
 <div class="form-group" ng-repeat="prompt in vm.prompts">
-	<label for="prompt_{{$index}}">{{prompt.displayName}} <span ng-if="prompt.required">(required)</span></label>
-	<div flow-init="{singleFile: true, allowDuplicateUploads: true}" flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" flow-file-success="prompt.onUploadSuccess($file)" flow-file-error="prompt.onUploadError($file, $message)">
-		<input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required">
+	<label for="prompt_{{$index}}">{{prompt.option.displayName}} <span ng-if="prompt.required">(required)</span></label>
+<div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" flow-file-success="prompt.onUploadSuccess($file)" flow-file-error="prompt.onUploadError($file, $message)">
+<div class="drop" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''">
+  <span class="btn btn-primary" flow-btn>
+  Choose file
+  <input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required" style="visibility: hidden; position: absolute;">
+  </span>
+  <strong>OR</strong>
+  Drag and drop your file here
+  <table>
+    <tr ng-repeat="file in $flow.files">
+      <td>{{file.name}}<a title="remove" ng-click="$flow.cancel()"><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a></td>
+    </tr>
+  </table>
+  </div>
 	</div>
 	<input ng-if="['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType)" id="prompt_{{$index}}" name="prompt_{{$index}}" type="number" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
 	<input ng-if="!['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType) && prompt.option.type !== 'FILE'" id="prompt_{{$index}}" name="prompt_{{$index}}" type="text" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
