@@ -4,7 +4,7 @@
 <div class="drop" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''">
   <span class="btn btn-primary" flow-btn>
   Choose file
-  <input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required" style="visibility: hidden; position: absolute;">
+  <input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required" style="display: none;">
   </span>
   <strong>OR</strong>
   Drag and drop your file here
