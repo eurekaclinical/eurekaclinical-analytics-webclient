@@ -11,6 +11,7 @@
             scope: {
                 item: '=',
                 key: '=?',
+                triggerValidation: '=?',
                 displayError: '&',
                 deleteModalTemplateUrl: '@'
             },
