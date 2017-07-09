@@ -23,6 +23,7 @@
         vm.nowEditing = $stateParams.key;
         vm.treeMultiDropZoneInitialKeys = [];
         vm.isItemAvailable = false;
+        vm.enableValidation = true;
 
         if (vm.nowEditing !== undefined) {
             PhenotypeService.getPhenotype(vm.nowEditing).then(
@@ -42,35 +43,40 @@
         let onRouteChangeOff = $scope.$on('$stateChangeStart', routeChange);
 
         vm.save = function() {
-            let categorization = {};
-            categorization.displayName = vm.name;
-            categorization.description = vm.description;
-            categorization.children = [];
-            if (vm.treeMultiDropZoneItems) {
-                for (let i = 0; i < vm.treeMultiDropZoneItems.length; i++) {
-                    let item = vm.treeMultiDropZoneItems[i];
-                    categorization.children.push({
-                        phenotypeKey: item.name
-                    });
+            if (vm.treeMultiDropZoneItems.length > 0) {
+                var categorization = {};
+                categorization.displayName = vm.name;
+                categorization.description = vm.description;
+                categorization.children = [];
+                if (vm.treeMultiDropZoneItems) {
+                    for (var i = 0; i < vm.treeMultiDropZoneItems.length; i++) {
+                        var item = vm.treeMultiDropZoneItems[i];
+                        categorization.children.push({
+                            phenotypeKey: item.name
+                        });
+                    }
                 }
-            }
-            categorization.categoricalType = vm.categoricalType;
-            if (vm.nowEditing !== undefined) {
-                categorization.id = vm.id;
-                categorization.key = vm.key;
-                categorization.userId = vm.userId;
-                categorization.type = vm.type;
-                PhenotypeService.updatePhenotype(categorization).then(function() {
-                    onRouteChangeOff();
-                    $state.transitionTo('phenotypes');
-                }, displayError);
+                categorization.categoricalType = vm.categoricalType;
+                if (vm.nowEditing !== undefined) {
+                    categorization.id = vm.id;
+                    categorization.key = vm.key;
+                    categorization.userId = vm.userId;
+                    categorization.type = vm.type;
+                    PhenotypeService.updatePhenotype(categorization).then(function() {
+                        onRouteChangeOff();
+                        $state.transitionTo('phenotypes');
+                    }, displayError);
+                } else {
+                    categorization.type = 'CATEGORIZATION';
+                    categorization.userId = $rootScope.user.info.id;
+                    PhenotypeService.createPhenotype(categorization).then(function() {
+                        onRouteChangeOff();
+                        $state.transitionTo('phenotypes');
+                    }, displayError);
+                }
+
             } else {
-                categorization.type = 'CATEGORIZATION';
-                categorization.userId = $rootScope.user.info.id;
-                PhenotypeService.createPhenotype(categorization).then(function() {
-                    onRouteChangeOff();
-                    $state.transitionTo('phenotypes');
-                }, displayError);
+                vm.isItemAvailable = true;
             }
 
         };
