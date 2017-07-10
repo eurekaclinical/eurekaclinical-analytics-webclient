@@ -1,3 +1,4 @@
+<!-- validation point JS  will move style to stylesheet-->
 <style>
     .trigger-validation {
         border-color: #a94442;
@@ -29,9 +30,10 @@
         <textarea id="description" name="description" class="form-control" ng-model="editPhenotype.description"></textarea>
     </div>
     <div class="form-group">
-        <label for="definition" class="control-label" ng-class="{ 'trigger-validation-text': editPhenotype.isItemAvailable}">Members</label>
+        <!-- validation point JS -->
+        <label for="definition" class="control-label" ng-class="{ 'trigger-validation-text': editPhenotype.validateConcept}">Members</label>
         <tree-multi-drop-zone id="definition" name="definition" keys="editPhenotype.treeMultiDropZoneInitialKeys" items="editPhenotype.treeMultiDropZoneItems" display-error="editPhenotype.displayTreeMultiDropZoneItemsError(message)" enable-validation="{{editPhenotype.enableValidation}}"
-            trigger-validation="editPhenotype.isItemAvailable" delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
+            trigger-validation="editPhenotype.validateConcept" delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
     </div>
     <button id="cancelButton" name="cancelButton" type="button" class="btn" ng-click="editPhenotype.cancel()">Cancel</button>
     <button id="saveButton" name="saveButton" type="submit" class="btn btn-primary">Save</button>

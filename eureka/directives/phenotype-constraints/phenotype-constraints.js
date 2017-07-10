@@ -17,8 +17,8 @@
                 maxDurationUnits: '=',
                 propertyName: '=',
                 propertyValue: '=',
-                conceptEnableValidation: '@?',
                 conceptTriggerValidation: '=?',
+                conceptEnableValidation: '@?',
                 onConceptOrPhenotypeError: '&?',
                 onTimeUnitsError: '&?'
             },

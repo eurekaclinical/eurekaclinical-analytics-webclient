@@ -22,7 +22,8 @@
         let vm = this;
         vm.nowEditing = $stateParams.key;
         vm.treeMultiDropZoneInitialKeys = [];
-        vm.isItemAvailable = false;
+        // validation point JS
+        vm.validateConcept = false;
         vm.enableValidation = true;
 
         if (vm.nowEditing !== undefined) {
@@ -43,6 +44,7 @@
         let onRouteChangeOff = $scope.$on('$stateChangeStart', routeChange);
 
         vm.save = function() {
+            // validation point JS
             if (vm.treeMultiDropZoneItems.length > 0) {
                 var categorization = {};
                 categorization.displayName = vm.name;
@@ -76,7 +78,8 @@
                 }
 
             } else {
-                vm.isItemAvailable = true;
+                // validation point JS
+                vm.validateConcept = true;
             }
 
         };

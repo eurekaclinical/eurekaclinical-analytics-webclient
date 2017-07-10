@@ -28,7 +28,7 @@
         <div class="panel-body">
             <phenotype-constraints id="mainDefinition" name="mainDefinition" concept-or-phenotype-key="editSequencePhenotype.sequenceObject.primaryPhenotype.phenotypeKey" concept-or-phenotype="editSequencePhenotype.primaryPhenotype" min-duration="editSequencePhenotype.sequenceObject.primaryPhenotype.minDuration"
                 min-duration-units="editSequencePhenotype.sequenceObject.primaryPhenotype.minDurationUnits" max-duration="editSequencePhenotype.sequenceObject.primaryPhenotype.maxDuration" max-duration-units="editSequencePhenotype.sequenceObject.primaryPhenotype.maxDurationUnits"
-                concept-enable-validation="{{editSequencePhenotype.enableValidation}}" concept-trigger-validation="editSequencePhenotype.isItemAvailableMain" property-name="editSequencePhenotype.sequenceObject.primaryPhenotype.property" property-value="editSequencePhenotype.sequenceObject.primaryPhenotype.propertyValue"
+                concept-enable-validation="{{editSequencePhenotype.enableValidation}}" concept-trigger-validation="editSequencePhenotype.validateConceptMain" property-name="editSequencePhenotype.sequenceObject.primaryPhenotype.property" property-value="editSequencePhenotype.sequenceObject.primaryPhenotype.propertyValue"
                 on-concept-or-phenotype-error="editSequencePhenotype.displayConceptOrPhenotypeError(message)" on-time-units-error="editSequencePhenotype.displayTimeUnitsError(message)"></phenotype-constraints>
         </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="panel-body">
             <phenotype-constraints id="relatedDefinition_{{$index}}" name="relatedDefinition_{{$index}}" concept-or-phenotype-key="relatedPhenotype.phenotypeField.phenotypeKey" concept-or-phenotype="editSequencePhenotype.relatedPhenotypes[$index]" min-duration="relatedPhenotype.phenotypeField.minDuration"
                 min-duration-units="relatedPhenotype.phenotypeField.minDurationUnits" max-duration="relatedPhenotype.phenotypeField.maxDuration" max-duration-units="relatedPhenotype.phenotypeField.maxDurationUnits" property-name="relatedPhenotype.phenotypeField.property"
-                property-value="relatedPhenotype.phenotypeField.propertyValue" concept-enable-validation="{{editSequencePhenotype.enableValidation}}" concept-trigger-validation="relatedPhenotype.isItemAvailable" on-concept-or-phenotype-error="editSequencePhenotype.displayConceptOrPhenotypeError(message)"
+                property-value="relatedPhenotype.phenotypeField.propertyValue" concept-enable-validation="{{editSequencePhenotype.enableValidation}}" concept-trigger-validation="relatedPhenotype.validateConcept" on-concept-or-phenotype-error="editSequencePhenotype.displayConceptOrPhenotypeError(message)"
                 on-time-units-error="editSequencePhenotype.displayTimeUnitsError(message)"></phenotype-constraints>
 
             <div class="form-group">

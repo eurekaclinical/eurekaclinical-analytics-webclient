@@ -24,7 +24,8 @@
         vm.sequenceObject = {};
         vm.allPhenotypes = [];
         vm.sequentialPhenotypes = [];
-        vm.isItemAvailableMain = false;
+        // validation point JS
+        vm.validateConceptMain = false;
         vm.enableValidation = true;
 
         vm.setTimeUnitDefaultForRelated = function(phenotype) {
@@ -102,7 +103,7 @@
             if (!vm.sequenceObject.relatedPhenotypes) {
                 vm.sequenceObject.relatedPhenotypes = [];
             }
-            vm.sequenceObject.relatedPhenotypes.push({ 'isItemAvailable': false });
+            vm.sequenceObject.relatedPhenotypes.push({ 'validateConcept': false });
             if (!vm.relatedPhenotypes) {
                 vm.relatedPhenotypes = [];
             }
@@ -155,8 +156,10 @@
         }
 
         let onRouteChangeOff = $scope.$on('$stateChangeStart', routeChange);
+
         vm.save = function() {
             var primaryPhenotype = vm.sequenceObject.primaryPhenotype;
+            // validation point JS
             var validationCorrect = true;
             if (primaryPhenotype) {
                 if (vm.primaryPhenotype !== undefined) {
@@ -174,16 +177,17 @@
                         primaryPhenotype.hasPropertyConstraint = false;
                     }
                 } else {
+                    // validation point JS
                     validationCorrect = false
-                    vm.isItemAvailableMain = true;
+                    vm.validateConceptMain = true;
                 }
             }
             if (vm.sequenceObject.relatedPhenotypes) {
                 for (var i = 0; i < vm.sequenceObject.relatedPhenotypes.length; i++) {
                     var relatedPhenotype = vm.sequenceObject.relatedPhenotypes[i];
                     if (vm.relatedPhenotypes[i] !== undefined) {
-                        //lets delete the value
-                        delete vm.sequenceObject.relatedPhenotypes[i].isItemAvailable;
+                        // validation point JS
+                        delete vm.sequenceObject.relatedPhenotypes[i].validateConcept;
                         if (relatedPhenotype.phenotypeField) {
                             if (vm.relatedPhenotypes[i]) {
                                 relatedPhenotype.phenotypeField.phenotypeKey = vm.relatedPhenotypes[i].name;
@@ -206,12 +210,14 @@
                             relatedPhenotype.sequentialPhenotypeSource = vm.sequentialPhenotypes[i].source;
                         }
                     } else {
+                        // validation point JS
                         validationCorrect = false;
-                        vm.sequenceObject.relatedPhenotypes[i].isItemAvailable = true;
+                        vm.sequenceObject.relatedPhenotypes[i].validateConcept = true;
                         break;
                     }
                 }
             }
+            // validation point JS
             if (validationCorrect === true) {
                 if (vm.nowEditing) {
                     PhenotypeService.updatePhenotype(vm.sequenceObject).then(function() {
