@@ -9,18 +9,16 @@
         return {
             restrict: 'AE',
             scope: {
-                conceptOrPhenotypeKey: '=?',
+				conceptOrPhenotypeKey: '=?',
                 conceptOrPhenotype: '=',
-                minDuration: '=',
-                minDurationUnits: '=',
-                maxDuration: '=',
-                maxDurationUnits: '=',
-                propertyName: '=',
-                propertyValue: '=',
-                conceptTriggerValidation: '=?',
-                conceptEnableValidation: '@?',
-                onConceptOrPhenotypeError: '&?',
-                onTimeUnitsError: '&?'
+				minDuration: '=',
+				minDurationUnits: '=',
+				maxDuration: '=',
+				maxDurationUnits: '=',
+				propertyName: '=',
+				propertyValue: '=',
+				onConceptOrPhenotypeError: '&?',
+				onTimeUnitsError: '&?'
             },
             bindToController: true,
             replace: false,
