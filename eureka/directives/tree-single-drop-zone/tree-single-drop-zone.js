@@ -11,8 +11,10 @@
             scope: {
                 item: '=',
                 key: '=?',
+                triggerValidation: '=?',
                 displayError: '&',
-                deleteModalTemplateUrl: '@'
+                deleteModalTemplateUrl: '@',
+                enableValidation: '@?'
             },
             bindToController: true,
             replace: false,
