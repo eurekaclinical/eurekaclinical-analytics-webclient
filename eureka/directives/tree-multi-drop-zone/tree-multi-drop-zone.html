@@ -1,4 +1,18 @@
-<div class="tree-drop">
+<style>
+.trigger-validation {
+border-color: #a94442;
+}
+ .trigger-validation-text {
+       color: #a94442;
+	 
+	   }
+
+	   .hide-item {
+		   visibility: hidden;
+	   }
+ </style>
+
+<div class="tree-drop" id="tree-container">
 	<ul class="sortable">
 		<li ng-if="vm.items" ng-repeat="item in vm.items">{{item.displayName}}<a title="remove" ng-click="vm.remove(item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
 		<li ng-if="!vm.items && vm.keys"><i class="fa fa-refresh fa-spin"></i>
@@ -7,6 +21,7 @@
 		Add...
 	</a>
 </div>
+<label id="error-label" class="trigger-validation-text hide-item">Concept is required</label>
 <script type="text/ng-template" id="addItemsModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Add Concepts and Phenotypes</h3>
