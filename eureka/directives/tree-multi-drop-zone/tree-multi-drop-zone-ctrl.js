@@ -13,7 +13,7 @@
 
 	function TreeMultiDropZoneCtrl($scope, PhenotypeService, TreeService, $uibModal) {
 		let vm = this;
-
+	 	vm.isDropZonevalid = '';
 		vm.add = function () {
 			if (!vm.items) {
 				vm.items = [];

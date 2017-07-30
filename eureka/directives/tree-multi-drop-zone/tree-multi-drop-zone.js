@@ -7,23 +7,36 @@
 
     function TreeMultiDropZone() {
         return {
-            require: 'ngModel',
+            require: ['ngModel', '^form'],
             restrict: 'AE',
-            link: function(scope, element, attr, ctrls) {
-                let myForm = $("#categorizationForm"); // easy way to get form to user listener
-                myForm.on("submit", function(event) {
-                    if (scope.vm.items.length > 0) {
-                        console.log('drop zone is valid');
-                        $('#tree-container').removeClass('trigger-validation'); 
-                        $('#error-label').addClass('hide-item'); // remove validation classes, will use bootstrap eventually
-                        scope.$parent.editPhenotype.save();  // calling the save function of the controller.  Will need to make this dynamic and not hard coded
-                    } else if (scope.vm.items.length === 0 && scope.$parent.categorizationForm.submitted === true) {
+            transclude: true,
+            link: function link(scope, elem, attrs, ngModel) {
+                if (!attrs.ngModel) {
+                    return;
+                }
+                var myForm = ngModel[1];
+                var theForm = attrs.formName
+                // Watch our internal model and change the external model
+                scope.$watch(function(myValue) {
+                    // console.log("Internal change: " + scope.imessage);
+                    // ngModelCtrl.$setViewValue(scope.imessage);
+                    console.log(myValue.vm.bindModel);
+                    if (myValue.vm.bindModel.length > 0) {
+
+                        myValue.vm.isDropZonevalid = 'True';
+                        $('#tree-container').removeClass('trigger-validation');
+                    } else if (myValue.vm.bindModel.length === 0 && myValue.$parent[theForm].submitted) {
+                        myValue.vm.isDropZonevalid = '';
                         $('#tree-container').addClass('trigger-validation');
-                        $('#error-label').removeClass('hide-item');  // remove validation classes, will use bootstrap eventually
+
+                    } else if (myValue.vm.bindModel.length === 0 && !myValue.$parent[theForm].submitted){
+                         myValue.vm.isDropZonevalid = '';
                     }
-                })
+                });
             },
             scope: {
+                bindModel: '=ngModel',
+                formName:'@',
                 items: '=',
                 keys: '=?',
                 displayError: '&',

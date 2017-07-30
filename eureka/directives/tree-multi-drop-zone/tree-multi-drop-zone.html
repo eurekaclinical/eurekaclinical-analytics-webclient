@@ -20,8 +20,8 @@ border-color: #a94442;
 	<a ng-if="vm.items || !vm.keys || vm.keys.length === 0" class="label-info text-center" href="" ng-click="vm.add()" style="display: block">
 		Add...
 	</a>
-</div>
-<input type="text" style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" ng-model="vm.items" name="myField" class="form-control" required required-message="'Concept is required'" />
+</div>{{bindModel}}  {{vm.bindModel}}
+<input style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropzonevalid" class="form-control" required required-message="'Concept is required'" />
 <script type="text/ng-template" id="addItemsModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Add Concepts and Phenotypes</h3>
@@ -35,4 +35,4 @@ border-color: #a94442;
 	</div>
 </script>
 
-<!--  -->
+<!--   -->
