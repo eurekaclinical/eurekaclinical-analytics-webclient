@@ -13,7 +13,7 @@
 
 	function TreeSingleDropZoneCtrl($scope, PhenotypeService, TreeService, $uibModal) {
 		let vm = this;
-
+		vm.isDropZonevalid = '';
 		vm.set = function () {
 			$uibModal.open({
 				templateUrl: 'setItemModal.html',

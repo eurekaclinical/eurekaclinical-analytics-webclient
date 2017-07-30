@@ -18,7 +18,8 @@
 				propertyName: '=',
 				propertyValue: '=',
 				onConceptOrPhenotypeError: '&?',
-				onTimeUnitsError: '&?'
+				onTimeUnitsError: '&?',
+                dropIndex: '@?'
             },
             bindToController: true,
             replace: false,

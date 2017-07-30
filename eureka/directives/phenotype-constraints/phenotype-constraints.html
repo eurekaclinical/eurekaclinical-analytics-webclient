@@ -3,7 +3,9 @@
 	<tree-single-drop-zone name="conceptOrPhenotype"
 						   key="vm.conceptOrPhenotypeKey"
 						   item="vm.conceptOrPhenotype" 
+						   ng-model="vm.conceptOrPhenotype" 
 						   display-error="vm.onConceptOrPhenotypeErr(message)" 
+						   drop-zone-index="{{vm.dropIndex}}"
 						   delete-modal-template-url="conceptOrPhenotypeDeleteModal.html"></tree-single-drop-zone>
 </div>
 <div class="form-group">

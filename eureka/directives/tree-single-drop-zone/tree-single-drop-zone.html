@@ -1,3 +1,16 @@
+<style>
+.trigger-validation {
+border-color: #a94442;
+}
+ .trigger-validation-text {
+       color: #a94442;
+	 
+	   }
+
+	   .hide-item {
+		   visibility: hidden;
+	   }
+ </style>
 <div class="tree-drop">
 	<ul class="sortable">
 		<li ng-if="vm.item">{{vm.item.displayName}}<a title="remove" ng-click="vm.remove(vm.item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
@@ -7,6 +20,7 @@
 		Set...
 	</a>
 </div>
+<input type="text" ng-model="vm.isDropZonevalid " name="dropZoneSingle_{{vm.dropZoneIndex}}" class="form-control" required required-message="'Concept is required'" />
 <script type="text/ng-template" id="setItemModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Set Concept or Phenotype</h3>

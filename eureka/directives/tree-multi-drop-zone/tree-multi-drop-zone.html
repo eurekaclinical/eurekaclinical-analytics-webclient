@@ -21,7 +21,7 @@ border-color: #a94442;
 		Add...
 	</a>
 </div>{{bindModel}}  {{vm.bindModel}}
-<input style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropzonevalid" class="form-control" required required-message="'Concept is required'" />
+<input type="text" ng-model="vm.isDropZonevalid " name="dropZoneMulti_{{vm.dropZoneIndex}}" class="form-control" required required-message="'Concept is required'" />
 <script type="text/ng-template" id="addItemsModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Add Concepts and Phenotypes</h3>
@@ -35,4 +35,4 @@ border-color: #a94442;
 	</div>
 </script>
 
-<!--   -->
+<!--  style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;"  -->

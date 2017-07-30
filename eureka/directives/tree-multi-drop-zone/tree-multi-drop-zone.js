@@ -7,7 +7,7 @@
 
     function TreeMultiDropZone() {
         return {
-            require: ['ngModel', '^form'],
+            require: ['?ngModel', '^form'],
             restrict: 'AE',
             transclude: true,
             link: function link(scope, elem, attrs, ngModel) {
@@ -25,22 +25,23 @@
 
                         myValue.vm.isDropZonevalid = 'True';
                         $('#tree-container').removeClass('trigger-validation');
-                    } else if (myValue.vm.bindModel.length === 0 && myValue.$parent[theForm].submitted) {
+                    } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
                         $('#tree-container').addClass('trigger-validation');
 
-                    } else if (myValue.vm.bindModel.length === 0 && !myValue.$parent[theForm].submitted){
+                    } else if (myValue.vm.bindModel.length === 0 && myForm.submitted){
                          myValue.vm.isDropZonevalid = '';
                     }
                 });
             },
             scope: {
                 bindModel: '=ngModel',
-                formName:'@',
+                formName:'@?',
                 items: '=',
                 keys: '=?',
                 displayError: '&',
-                deleteModalTemplateUrl: '@'
+                deleteModalTemplateUrl: '@',
+                dropZoneIndex:'@?'
             },
             bindToController: true,
             replace: false,
