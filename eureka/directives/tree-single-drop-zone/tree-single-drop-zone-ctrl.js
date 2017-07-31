@@ -13,6 +13,7 @@
 
 	function TreeSingleDropZoneCtrl($scope, PhenotypeService, TreeService, $uibModal) {
 		let vm = this;
+		//This dropZoneValid is for the hidden input field.  If there are items the dropZoneValid has text, which makes the hidden input field valid.
 		vm.isDropZonevalid = '';
 		vm.set = function () {
 			$uibModal.open({

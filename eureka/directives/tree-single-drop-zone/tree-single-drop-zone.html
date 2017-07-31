@@ -1,35 +1,41 @@
 <style>
-.trigger-validation {
-border-color: #a94442;
-}
- .trigger-validation-text {
-       color: #a94442;
-	 
-	   }
-
-	   .hide-item {
-		   visibility: hidden;
-	   }
- </style>
+    .trigger-validation {
+        border-color: #a94442;
+    }
+    
+    .trigger-validation-text {
+        color: #a94442;
+    }
+    
+    .hide-item {
+        visibility: hidden;
+    }
+</style>
 <div class="tree-drop">
-	<ul class="sortable">
-		<li ng-if="vm.item">{{vm.item.displayName}}<a title="remove" ng-click="vm.remove(vm.item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
-		<li ng-if="!vm.item && vm.key"><i class="fa fa-refresh fa-spin"></i>
-	</ul>
-	<a class="label-info text-center" href="" ng-click="vm.set()" ng-if="!vm.item && !vm.key" style="display: block">
+    <ul class="sortable">
+        <li ng-if="vm.item">{{vm.item.displayName}}<a title="remove" ng-click="vm.remove(vm.item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
+            <li ng-if="!vm.item && vm.key"><i class="fa fa-refresh fa-spin"></i>
+    </ul>
+    <a class="label-info text-center" href="" ng-click="vm.set()" ng-if="!vm.item && !vm.key" style="display: block">
 		Set...
 	</a>
 </div>
-<input type="text" ng-model="vm.isDropZonevalid " name="dropZoneSingle_{{vm.dropZoneIndex}}" class="form-control" required required-message="'Concept is required'" />
+<!--Below we are using a hidden input field for the dropzone model. The input field will hook into the validator automatically since it is a form.
+	Even though the field is hidden the required messages will display as normal. Also since we are using the validator the error message will display
+	 and behave like all the other fields.
+	 Notice we have ng-model and name attribute.  The model is populated based on the drop zone items.  If there are no drop zone items the input is empty.
+	 name attribute has to be dynamic in the cases there are multiple drop zones on a page.
+-->
+<input  style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropZoneSingle_{{vm.dropZoneIndex}}" class="form-control" required required-message="'Concept is required'" />
 <script type="text/ng-template" id="setItemModal.html">
-	<div class="modal-header">
-		<h3 class="modal-title">Set Concept or Phenotype</h3>
-	</div>
-	<div class="modal-body">
-		<tree-component selected-items="mo.itemsToAdd"></tree-component>
-	</div>
-	<div class="modal-footer">
-		<button type="submit" class="btn" ng-click="mo.cancel()">Cancel</button>
-		<button class="btn btn-primary" ng-click="mo.ok()">Set and close</button>
-	</div>
+    <div class="modal-header">
+        <h3 class="modal-title">Set Concept or Phenotype</h3>
+    </div>
+    <div class="modal-body">
+        <tree-component selected-items="mo.itemsToAdd"></tree-component>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn" ng-click="mo.cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="mo.ok()">Set and close</button>
+    </div>
 </script>

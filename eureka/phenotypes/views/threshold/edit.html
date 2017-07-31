@@ -72,7 +72,14 @@
 			</div>
 			<div class="form-group">
 				<label for="contexts_{{$index}}" class="control-label">Context(s)</label>
-				<tree-multi-drop-zone id="definition" name="contexts_{{$index}}" keys="editThresholdPhenotype.initialContextKeys[$index]" ng-model="editThresholdPhenotype.contextItems[$index]" drop-zone-index="{{$index+1}}"items="editThresholdPhenotype.contextItems[$index]" display-error="editThresholdPhenotype.displayConceptOrPhenotypeError(message)" delete-modal-template-url="conceptOrPhenotypeDeleteModal.html"></tree-multi-drop-zone>
+				<tree-multi-drop-zone id="definition" 
+									  name="contexts_{{$index}}" 
+									  keys="editThresholdPhenotype.initialContextKeys[$index]" 
+									  ng-model="editThresholdPhenotype.contextItems[$index]" 
+									  drop-zone-index="{{$index+1}}"
+									  items="editThresholdPhenotype.contextItems[$index]" 
+									  display-error="editThresholdPhenotype.displayConceptOrPhenotypeError(message)" 
+									  delete-modal-template-url="conceptOrPhenotypeDeleteModal.html"></tree-multi-drop-zone>
 			</div>
 			<div class="form-group">
 				<label for="minDistanceBetween_{{$index}}">Time distance between context(s) and thresholded values</label>

@@ -14,22 +14,16 @@
                 if (!attrs.ngModel) {
                     return;
                 }
-                var myForm = ngModel[1];
-                var theForm = attrs.formName
-                // Watch our internal model and change the external model
-                scope.$watch(function(myValue) {
-                    // console.log("Internal change: " + scope.imessage);
-                    // ngModelCtrl.$setViewValue(scope.imessage);
-                    console.log(myValue.vm.bindModel);
-                    if (myValue.vm.bindModel.length > 0) {
+                let myForm = ngModel[1];
 
+                scope.$watch(function(myValue) {
+                    if (myValue.vm.bindModel.length > 0) {
                         myValue.vm.isDropZonevalid = 'True';
                         $('#tree-container').removeClass('trigger-validation');
                     } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
                         $('#tree-container').addClass('trigger-validation');
-
-                    } else if (myValue.vm.bindModel.length === 0 && myForm.submitted){
+                    } else if (myValue.vm.bindModel.length === 0 && !myForm.submitte){
                          myValue.vm.isDropZonevalid = '';
                     }
                 });

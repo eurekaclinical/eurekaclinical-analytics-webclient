@@ -21,7 +21,13 @@
     </div>
     <div class="form-group">
         <label for="definition" class="control-label">Members</label>
-           <tree-multi-drop-zone id="definition" name="definition"  ng-model="editPhenotype.treeMultiDropZoneItems" form-name="categorizationForm" keys="editPhenotype.treeMultiDropZoneInitialKeys" items="editPhenotype.treeMultiDropZoneItems" display-error="editPhenotype.displayTreeMultiDropZoneItemsError(message)" delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
+           <tree-multi-drop-zone id="definition" 
+		   						 ng-model="editPhenotype.treeMultiDropZoneItems" 
+								 form-name="categorizationForm" 
+								 keys="editPhenotype.treeMultiDropZoneInitialKeys" 
+								 items="editPhenotype.treeMultiDropZoneItems" 
+								 display-error="editPhenotype.displayTreeMultiDropZoneItemsError(message)" 
+								 delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
     </div>
 
 	

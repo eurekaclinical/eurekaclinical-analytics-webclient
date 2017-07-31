@@ -13,21 +13,16 @@
                 if (!attrs.ngModel) {
                     return;
                 }
-                var myForm = ngModel[1];
-                var theForm = attrs.formName
-                    // Watch our internal model and change the external model
-                scope.$watch(function(myValue) {
-                    // console.log("Internal change: " + scope.imessage);
-                    // ngModelCtrl.$setViewValue(scope.imessage);
-                    console.log(myValue.vm.bindModel);
-                    if (myValue.vm.bindModel) {
 
+                let myForm = ngModel[1];
+
+                scope.$watch(function(myValue) {
+                    if (myValue.vm.bindModel) {
                         myValue.vm.isDropZonevalid = 'True';
                         $('.tree-drop').removeClass('trigger-validation');
                     } else if ((myValue.vm.bindModel === null || myValue.vm.bindModel === undefined) && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
                         $('.tree-drop').addClass('trigger-validation');
-
                     } else if ((myValue.vm.bindModel === null || myValue.vm.bindModel === undefined) && !myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
                     }
@@ -38,8 +33,8 @@
                 key: '=?',
                 displayError: '&',
                 deleteModalTemplateUrl: '@',
-                bindModel: '=ngModel',
-                dropZoneIndex:'@?'
+                bindModel: '=ngModel', //Directive should have ng-model attached will make optional
+                dropZoneIndex:'@?'  //Directive will need index for cases where there are multiple zones on page: sequence and threshold
             },
             bindToController: true,
             replace: false,
