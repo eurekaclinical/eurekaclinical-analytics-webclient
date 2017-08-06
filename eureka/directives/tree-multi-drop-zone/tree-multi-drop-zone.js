@@ -15,14 +15,15 @@
                     return;
                 }
                 let myForm = ngModel[1];
+                let currentDropArea = angular.element(elem.children()[1]);
 
                 scope.$watch(function(myValue) {
                     if (myValue.vm.bindModel.length > 0) {
                         myValue.vm.isDropZonevalid = 'True';
-                        $('#tree-container').removeClass('trigger-validation');
+                        currentDropArea.removeClass('trigger-validation');
                     } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
-                        $('#tree-container').addClass('trigger-validation');
+                        currentDropArea.addClass('trigger-validation');
                     } else if (myValue.vm.bindModel.length === 0 && !myForm.submitted){
                          myValue.vm.isDropZonevalid = '';
                     }
