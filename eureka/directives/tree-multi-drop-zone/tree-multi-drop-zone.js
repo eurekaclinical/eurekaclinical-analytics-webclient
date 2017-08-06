@@ -16,13 +16,16 @@
                 }
                 let myForm = ngModel[1];
                 let currentDropArea = angular.element(elem.children()[1]);
+                let labelDropArea = angular.element(elem.parent()[0].children[0]);
 
                 scope.$watch(function(myValue) {
                     if (myValue.vm.bindModel.length > 0) {
                         myValue.vm.isDropZonevalid = 'True';
+                        labelDropArea.removeClass('trigger-validation-text');
                         currentDropArea.removeClass('trigger-validation');
                     } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
+                        labelDropArea.addClass('trigger-validation-text');
                         currentDropArea.addClass('trigger-validation');
                     } else if (myValue.vm.bindModel.length === 0 && !myForm.submitted){
                          myValue.vm.isDropZonevalid = '';
@@ -31,7 +34,6 @@
             },
             scope: {
                 bindModel: '=ngModel',
-                items: '=',
                 keys: '=?',
                 displayError: '&',
                 deleteModalTemplateUrl: '@',

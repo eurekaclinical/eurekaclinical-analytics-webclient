@@ -81,14 +81,14 @@
 	<fieldset id ="concepts">
 		<legend>Concepts</legend>
 		<div class="form-group">
-			<tree-multi-drop-zone items="jobs.treeMultiDropZoneItems" display-error="jobs.displayTreeMultiDropZoneItemsError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-multi-drop-zone>
+			<tree-multi-drop-zone ng-model="jobs.treeMultiDropZoneItems" display-error="jobs.displayTreeMultiDropZoneItemsError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-multi-drop-zone>
 		</div>                                
 	</fieldset>
 	<fieldset id ="dateRange">
 		<legend>Date range</legend>
 		<div class="form-group">
 			<label class="control-label" for="dateRangePhenotypeKey">Concept</label>
-			<tree-single-drop-zone item="jobs.dateRangeDropZoneItem" display-error="jobs.displayDateRangeDropZoneItemError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-single-drop-zone>
+			<tree-single-drop-zone ng-model="jobs.dateRangeDropZoneItem" display-error="jobs.displayDateRangeDropZoneItemError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-single-drop-zone>
 		</div>
 		<div class="form-group">
 			<label for="earliestDateSelector" class="control-label">Earliest date</label>
