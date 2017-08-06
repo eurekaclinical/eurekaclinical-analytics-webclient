@@ -44,7 +44,6 @@
 				<label class="control-label" for="conceptOrPhenotype_{{$index}}">Concept or phenotype</label>
 				<tree-single-drop-zone name="conceptOrPhenotype_{{$index}}"
 									   key="editThresholdPhenotype.initialConceptOrPhenotypeKeys[$index]"
-									   item="editThresholdPhenotype.conceptOrPhenotypes[$index]" 
 									   ng-model="editThresholdPhenotype.conceptOrPhenotypes[$index]"
 										drop-zone-index="{{$index + 1}}"
 									   display-error="editThresholdPhenotype.displayConceptOrPhenotypeError(message)" 
@@ -77,7 +76,6 @@
 									  keys="editThresholdPhenotype.initialContextKeys[$index]" 
 									  ng-model="editThresholdPhenotype.contextItems[$index]" 
 									  drop-zone-index="{{$index+1}}"
-									  items="editThresholdPhenotype.contextItems[$index]" 
 									  display-error="editThresholdPhenotype.displayConceptOrPhenotypeError(message)" 
 									  delete-modal-template-url="conceptOrPhenotypeDeleteModal.html"></tree-multi-drop-zone>
 			</div>

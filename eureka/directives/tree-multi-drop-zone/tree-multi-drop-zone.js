@@ -23,14 +23,13 @@
                     } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                         myValue.vm.isDropZonevalid = '';
                         $('#tree-container').addClass('trigger-validation');
-                    } else if (myValue.vm.bindModel.length === 0 && !myForm.submitte){
+                    } else if (myValue.vm.bindModel.length === 0 && !myForm.submitted){
                          myValue.vm.isDropZonevalid = '';
                     }
                 });
             },
             scope: {
                 bindModel: '=ngModel',
-                formName:'@?',
                 items: '=',
                 keys: '=?',
                 displayError: '&',

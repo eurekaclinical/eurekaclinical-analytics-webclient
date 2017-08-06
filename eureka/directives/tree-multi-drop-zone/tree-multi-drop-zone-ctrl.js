@@ -16,8 +16,8 @@
 		//This dropZoneValid is for the hidden input field.  If there are items the dropZoneValid has text, which makes the hidden input field valid.
 	 	vm.isDropZonevalid = '';
 		vm.add = function () {
-			if (!vm.items) {
-				vm.items = [];
+			if (!vm.bindModel) {
+				vm.bindModel = [];
 			}
 			$uibModal.open({
 				templateUrl: 'addItemsModal.html',
@@ -28,14 +28,14 @@
 						for (let i = 0; i < itemsToAdd.length; i++) {
 							let selectedItem = itemsToAdd[i];
 							let found = false;
-							for (let j = 0; j < vm.items.length; j++) {
-								if (selectedItem.key === vm.items[j].key) {
+							for (let j = 0; j < vm.bindModel.length; j++) {
+								if (selectedItem.key === vm.bindModel[j].key) {
 									found = true;
 									break;
 								}
 							}
 							if (!found) {
-								vm.items.push({
+								vm.bindModel.push({
 									name: selectedItem.key,
 									displayName: selectedItem.displayName,
 									type: selectedItem.type
@@ -60,9 +60,9 @@
 				}
 			}).result.then(
 					function () {
-						let index = vm.items.indexOf(itemToRemove);
+						let index = vm.bindModel.indexOf(itemToRemove);
 						if (index > -1) {
-							vm.items.splice(index, 1);
+							vm.bindModel.splice(index, 1);
 							vm.keys.split(index, 1);
 						}
 					},
@@ -97,18 +97,18 @@
 							}
 						}
 					}
-					vm.items = [];
+					vm.bindModel = [];
 					for (var i = 0; i < conceptKeys.length; i++) {
 						let dn = keyToDisplayName[conceptKeys[i]];
 						if (!dn) {
-							vm.items.push({
+							vm.bindModel.push({
 								name: conceptKeys[i],
 								displayName: conceptKeys[i],
 								type: null
 							});
 							vm.displayError('Unknown concept ' + conceptKeys[i]);
 						} else {
-							vm.items.push({
+							vm.bindModel.push({
 								name: conceptKeys[i],
 								displayName: dn.displayName,
 								type: dn.type
@@ -117,13 +117,13 @@
 					}
 					for (let i = 0; i < phenotypeKeys.length; i++) {
 						PhenotypeService.getPhenotype(phenotypeKeys[i]).then(function (phenotype) {
-							vm.items.push({
+							vm.bindModel.push({
 								name: phenotype.key, 
 								displayName: phenotype.displayName,
 								type: phenotype.type
 							});
 						}, function (msg) {
-							vm.items.push({
+							vm.bindModel.push({
 								name: phenotypeKeys[i],
 								displayName: phenotypeKeys[i]
 							});

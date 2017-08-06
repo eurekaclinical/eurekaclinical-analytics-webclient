@@ -22,8 +22,8 @@
 				controllerAs: 'mo'
 			}).result.then(
 					function (selectedItem) {
-						if (selectedItem !== null && (!vm.item || selectedItem.key !== vm.item.key)) {
-							vm.item = {
+						if (selectedItem !== null && (!vm.bindModel || selectedItem.key !== vm.bindModel.key)) {
+							vm.bindModel = {
 								name: selectedItem.key,
 								displayName: selectedItem.displayName,
 								type: selectedItem.type
@@ -47,7 +47,7 @@
 				}
 			}).result.then(
 					function () {
-						vm.item = null;
+						vm.bindModel = null;
 						vm.key = null;
 					},
 					function (arg) {
@@ -64,19 +64,19 @@
 				} else {
 					conceptKey = vm.key;
 				}
-				vm.item = null;
+				vm.bindModel = null;
 				if (conceptKey !== null) {
 					TreeService.getTreeNode(conceptKey).then(function (concept) {
-						vm.item = {
+						vm.bindModel = {
 							name: conceptKey,
 							displayName: concept.displayName,
 							type: concept.type
 						};
 						if (concept.type === 'SYSTEM') {
-							vm.item.systemType = concept.systemType;
+							vm.bindModel.systemType = concept.systemType;
 						}
 					}, function (msg) {
-						vm.item = {
+						vm.bindModel = {
 							name: conceptKey,
 							displayName: conceptKey
 						};
@@ -84,13 +84,13 @@
 					});
 				} else if (phenotypeKey !== null) {
 					PhenotypeService.getPhenotype(phenotypeKey).then(function (phenotype) {
-						vm.item = {
+						vm.bindModel = {
 							name: phenotype.key,
 							displayName: phenotype.displayName,
 							type: phenotype.type
 						};
 					}, function (msg) {
-						vm.item = {
+						vm.bindModel = {
 							name: phenotypeKey,
 							displayName: phenotypeKey
 						};
