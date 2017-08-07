@@ -27,7 +27,7 @@ border-color: #a94442;
 	 Notice we have ng-model and name attribute.  The model is populated based on the drop zone items.  If there are no drop zone items the input is empty.
 	 name attribute has to be dynamic in the cases there are multiple drop zones on a page.
 -->
-<input style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropZoneMulti_{{vm.dropZoneIndex}}" class="form-control" required required-message="'Concept is required'" />
+<input style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropZoneMulti_{{vm.dropZoneIndex}}" class="form-control" ng-required="vm.isRequired" required-message="'Concept is required'" />
 <script type="text/ng-template" id="addItemsModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Add Concepts and Phenotypes</h3>
