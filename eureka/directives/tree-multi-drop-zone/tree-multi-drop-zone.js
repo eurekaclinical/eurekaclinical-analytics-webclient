@@ -11,13 +11,15 @@
             restrict: 'AE',
             transclude: true,
             link: function link(scope, elem, attrs, ngModel) {
+                //If isrequired null validation will be enabled
                 if (!attrs.isRequired) {
                     return;
                 }
+                //If isrequired validation will be enabled
                 if (attrs.isRequired) {
                     let myForm = ngModel[1];
-                    let currentDropArea = angular.element(elem.children()[1]);
-                    let labelDropArea = angular.element(elem.parent()[0].children[0]);
+                    let currentDropArea = angular.element(elem.children()[1]); //Get current drop area to highlight for validation
+                    let labelDropArea = angular.element(elem.parent()[0].children[0]); //Get label above drop are to highlight for validation
 
                     scope.$watch(function(myValue) {
                         if (myValue.vm.bindModel.length > 0) {
@@ -40,7 +42,7 @@
                 displayError: '&',
                 deleteModalTemplateUrl: '@',
                 dropZoneIndex:'@?',
-                isRequired:'@?'
+                isRequired:'@?' //If isRequired not added validation will be disabled
             },
             bindToController: true,
             replace: false,
