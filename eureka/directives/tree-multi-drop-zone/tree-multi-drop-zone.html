@@ -1,12 +1,33 @@
-<div class="tree-drop">
+<style>
+.trigger-validation {
+border-color: #a94442;
+}
+ .trigger-validation-text {
+       color: #a94442;
+	 
+	   }
+
+	   .hide-item {
+		   visibility: hidden;
+	   }
+ </style>
+
+<div class="tree-drop" id="tree-container">
 	<ul class="sortable">
-		<li ng-if="vm.items" ng-repeat="item in vm.items">{{item.displayName}}<a title="remove" ng-click="vm.remove(item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
-		<li ng-if="!vm.items && vm.keys"><i class="fa fa-refresh fa-spin"></i>
+		<li ng-if="vm.bindModel" ng-repeat="item in vm.bindModel">{{item.displayName}}<a title="remove" ng-click="vm.remove(item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
+		<li ng-if="!vm.bindModel && vm.keys"><i class="fa fa-refresh fa-spin"></i>
 	</ul>
-	<a ng-if="vm.items || !vm.keys || vm.keys.length === 0" class="label-info text-center" href="" ng-click="vm.add()" style="display: block">
+	<a ng-if="vm.bindModel || !vm.keys || vm.keys.length === 0" class="label-info text-center" href="" ng-click="vm.add()" style="display: block">
 		Add...
 	</a>
 </div>
+<!--Below we are using a hidden input field for the dropzone model. The input field will hook into the validator automatically since it is a form.
+	Even though the field is hidden the required messages will display as normal. Also since we are using the validator the error message will display
+	 and behave like all the other fields.
+	 Notice we have ng-model and name attribute.  The model is populated based on the drop zone items.  If there are no drop zone items the input is empty.
+	 name attribute has to be dynamic in the cases there are multiple drop zones on a page.
+-->
+<input style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.isDropZonevalid " name="dropZoneMulti_{{vm.dropZoneIndex}}" class="form-control" ng-required="vm.isRequired" required-message="'Concept is required'" />
 <script type="text/ng-template" id="addItemsModal.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Add Concepts and Phenotypes</h3>

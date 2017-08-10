@@ -36,6 +36,7 @@
 								   property-name="editSequencePhenotype.sequenceObject.primaryPhenotype.property"
 								   property-value="editSequencePhenotype.sequenceObject.primaryPhenotype.propertyValue"
 								   on-concept-or-phenotype-error="editSequencePhenotype.displayConceptOrPhenotypeError(message)"
+								   	drop-index="dropZoneMain"
 								   on-time-units-error="editSequencePhenotype.displayTimeUnitsError(message)"></phenotype-constraints>
 		</div>
 	</div>
@@ -54,7 +55,8 @@
 								   property-name="relatedPhenotype.phenotypeField.property"
 								   property-value="relatedPhenotype.phenotypeField.propertyValue"
 								   on-concept-or-phenotype-error="editSequencePhenotype.displayConceptOrPhenotypeError(message)"
-								   on-time-units-error="editSequencePhenotype.displayTimeUnitsError(message)"></phenotype-constraints>
+								   on-time-units-error="editSequencePhenotype.displayTimeUnitsError(message)"
+									drop-index="dropZone_{{$index}}"></phenotype-constraints>
 
 			<div class="form-group">
 				<label class="control-label" for="temporalRelation_{{$index}}">Temporal relation</label>

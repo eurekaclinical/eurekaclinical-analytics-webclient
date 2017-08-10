@@ -54,22 +54,24 @@
 				}
 			}
 			categorization.categoricalType = vm.categoricalType;
-			if (vm.nowEditing !== undefined) {
-				categorization.id = vm.id;
-				categorization.key = vm.key;
-				categorization.userId = vm.userId;
-				categorization.type = vm.type;
-				PhenotypeService.updatePhenotype(categorization).then(function () {
-					onRouteChangeOff();
-					$state.transitionTo('phenotypes');
-				}, displayError);
-			} else {
-				categorization.type = 'CATEGORIZATION';
-				categorization.userId = $rootScope.user.info.id;
-				PhenotypeService.createPhenotype(categorization).then(function () {
-					onRouteChangeOff();
-					$state.transitionTo('phenotypes');
-				}, displayError);
+			if(vm.treeMultiDropZoneItems.length > 0){
+				if (vm.nowEditing !== undefined) {
+					categorization.id = vm.id;
+					categorization.key = vm.key;
+					categorization.userId = vm.userId;
+					categorization.type = vm.type;
+					PhenotypeService.updatePhenotype(categorization).then(function () {
+						onRouteChangeOff();
+						$state.transitionTo('phenotypes');
+					}, displayError);
+				} else {
+					categorization.type = 'CATEGORIZATION';
+					categorization.userId = $rootScope.user.info.id;
+					PhenotypeService.createPhenotype(categorization).then(function () {
+						onRouteChangeOff();
+						$state.transitionTo('phenotypes');
+					}, displayError);
+				}
 			}
 
 		};

@@ -18,7 +18,8 @@
 				propertyName: '=',
 				propertyValue: '=',
 				onConceptOrPhenotypeError: '&?',
-				onTimeUnitsError: '&?'
+				onTimeUnitsError: '&?',
+                dropIndex: '@?' //dropIndex need for views with multiple drop zones.  The name attribute for the input field has to be unique
             },
             bindToController: true,
             replace: false,
