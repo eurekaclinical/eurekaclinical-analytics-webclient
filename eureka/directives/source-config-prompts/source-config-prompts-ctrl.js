@@ -9,7 +9,7 @@
 
     function SourceConfigPromptsCtrl($scope) {
         let vm = this;
-
+        vm.inputField = '';
         extractPrompts();
 
         function extractPrompts() {
@@ -41,8 +41,7 @@
                             }
                             vm.prompts.push(prompt);
                         }
-                    }
-                                   );
+                    });
                 });
             }
         }

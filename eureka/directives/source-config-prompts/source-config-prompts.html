@@ -1,6 +1,24 @@
+<style>
+    .trigger-validation {
+        border-color: #a94442;
+    }
+    
+    .trigger-validation-text {
+        color: #a94442;
+    }
+    
+    .hide-item {
+        visibility: hidden;
+    }
+</style>
+
 <div class="form-group" ng-repeat="prompt in vm.prompts">
 	<label for="prompt_{{$index}}">{{prompt.option.displayName}} <span ng-if="prompt.required">(required)</span></label>
-<div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" flow-file-success="prompt.onUploadSuccess($file)" flow-file-error="prompt.onUploadError($file, $message)">
+<div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" 
+      flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" 
+      flow-file-success="prompt.onUploadSuccess($file)" 
+      flow-file-error="prompt.onUploadError($file, $message)"
+      flow-file-added="vm.fileAddedValidation( $file, $event, $flow )">
 <div class="drop" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''">
   <span class="btn btn-primary" flow-btn>
   Choose file
@@ -17,4 +35,5 @@
 	</div>
 	<input ng-if="['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType)" id="prompt_{{$index}}" name="prompt_{{$index}}" type="number" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
 	<input ng-if="!['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType) && prompt.option.type !== 'FILE'" id="prompt_{{$index}}" name="prompt_{{$index}}" type="text" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
+<input  style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.inputField " name="fileUpload"  class="form-control" required required-message="'File is required'" />
 </div>
