@@ -60,7 +60,7 @@
 			<select class="form-control" ng-model="jobs.jobSourceConfig" ng-options="sc.displayName for sc in jobs.sourceConfigs " required required-message="'Data is required'">
 			</select>
 		</div>  
-		<source-config-prompts source-config="jobs.jobSourceConfig" prompts="jobs.sourceConfigPrompts" file-upload-success="jobs.fileUploadSuccess(file)" file-upload-error="jobs.fileUploadError(file, message)"></source-config-prompts>
+		<source-config-prompts source-config="jobs.jobSourceConfig" ng-model="jobs.sourceConfigPrompts[0].fileInput.files" prompts="jobs.sourceConfigPrompts" file-upload-success="jobs.fileUploadSuccess(file)" file-upload-error="jobs.fileUploadError(file, message)"></source-config-prompts>
 	</fieldset>
 	<fieldset id ="actions">
 		<legend>Action</legend>
