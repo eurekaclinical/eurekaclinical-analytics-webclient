@@ -16,7 +16,12 @@
 		</div>
 		<div class="form-group">
 			<label for="patCohortDefinition" class="control-label">Criteria</label>
-			<tree-multi-drop-zone items="editCohort.treeMultiDropZoneItems" keys="editCohort.treeMultiDropZoneInitialKeys" display-error="editCohort.displayError" delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
+			<tree-multi-drop-zone ng-model="editCohort.treeMultiDropZoneItems" 
+								  items="editCohort.treeMultiDropZoneItems" 
+								  keys="editCohort.treeMultiDropZoneInitialKeys" 
+								  display-error="editCohort.displayError"
+								  is-required="true" 
+								  delete-modal-template-url="treeMultiDropZoneDeleteModal.html"></tree-multi-drop-zone>
 		</div>
 		<button id="patCohortEditCancelButton" type="button" class="btn" ng-click="editCohort.cancelCohortForm()">Cancel</button>
 		<button id="patCohortEditSaveButton" type="submit" class="btn btn-primary">Save</button>
