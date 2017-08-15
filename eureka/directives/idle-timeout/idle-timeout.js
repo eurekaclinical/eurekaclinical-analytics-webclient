@@ -26,7 +26,7 @@
                     let maxInactiveInterval = sessionProperties.maxInactiveInterval;
 		    $(element).idleTimeout({
 			idleTimeLimit: maxInactiveInterval - 30, //Time out with 30 seconds to spare to make sure the server session doesn't expire first
-			redirectUrl: 'logout',
+			redirectUrl: '#/logout',
 			alertDisplayLimit: 60, // Display 60 seconds before send of session.
 			sessionKeepAliveTimer: maxInactiveInterval - 15 //Send a keep alive signal with 15 seconds to spare.
 		    });
