@@ -1,0 +1,29 @@
+<h1>Datasets</h1>
+<p class="lead">Define datasets</p>
+<div class="alert alert-danger" role="alert" ng-if="datasets.loadErrorMsg">
+	<strong>Error loading datasets!</strong> {{datasets.loadErrorMsg}}
+</div>
+<div>
+	<a class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>
+		Define New Dataset
+	</a>
+</div>
+<!-- ng-table -->
+<table ng-table="datasets.tableParams" class="table" show-filter="true">
+	<tr ng-repeat="dataset in $data">
+		<td style="width: 4em;">
+			<a title="Edit">
+				<span class="glyphicon glyphicon-pencil edit-icon" title="Edit"></span>
+			</a>
+			<span class="glyphicon glyphicon-remove delete-icon" title="Delete" ></span>
+		</td>
+		<td title="'Display Name'" filter="{ displayName: 'text'}" sortable="'displayName'">
+			{{dataset.displayName}}
+		</td>
+		<td title="'Owner User Name'" filter="{ ownerUsername: 'text'}" sortable="'ownerUsername'">
+			{{dataset.ownerUsername}}
+		</td>
+		<td title="'Description'" filter="{ description: 'text'}" sortable="'description'">
+		</td>
+	</tr>
+</table>
