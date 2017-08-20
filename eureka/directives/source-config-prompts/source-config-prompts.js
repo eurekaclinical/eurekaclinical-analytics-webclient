@@ -3,7 +3,7 @@
 
     angular
         .module('eureka')
-        .directive('sourceConfigPrompts', SourceConfigPrompts);
+        .directive('sourceConfigPrompts',['$timeout', SourceConfigPrompts]);
 
     function SourceConfigPrompts($timeout) {
         return {
