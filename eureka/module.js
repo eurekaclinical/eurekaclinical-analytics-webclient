@@ -36,13 +36,14 @@
         'angularValidator',
         'ngMessages',
         'ngTable',
-	'ngCookies',
+	    'ngCookies',
         'eureka.cohorts',
         'eureka.phenotypes',
         'eureka.help',
         'eureka.jobs',
-	'eureka.index',
-	'eureka.logout',
+        'eureka.datasets',
+	    'eureka.index',
+	    'eureka.logout',
         'flow']);
 
     angular.module('eureka').run(eurekaRun);
