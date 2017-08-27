@@ -20,7 +20,7 @@
                         fileSpace = angular.element('div.drop')[0]; // Get element to highlight file border when validation is false
                         fileHeader = angular.element('div.drop')[0].parentElement.parentElement.getElementsByTagName('label')[0]; // Get element to highlight file header when validation is false
                         setWatch()
-                    }, 3000);
+                    }, 1000);
                 }
 
                 function setWatch() {
