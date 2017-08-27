@@ -1,18 +1,4 @@
-<style>
-.trigger-validation {
-border-color: #a94442;
-}
- .trigger-validation-text {
-       color: #a94442;
-	 
-	   }
-
-	   .hide-item {
-		   visibility: hidden;
-	   }
- </style>
-
-<div class="tree-drop" id="tree-container">
+<div class="tree-drop form-control" id="tree-container" style="min-height:52px; height:inherit;">
 	<ul class="sortable">
 		<li ng-if="vm.bindModel" ng-repeat="item in vm.bindModel">{{item.displayName}}<a title="remove" ng-click="vm.remove(item) "><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a>
 		<li ng-if="!vm.bindModel && vm.keys"><i class="fa fa-refresh fa-spin"></i>
