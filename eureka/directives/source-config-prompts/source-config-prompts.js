@@ -18,7 +18,7 @@
                     $timeout(function() {
                         // Had to use timeout to make sure DOM is loaded
                         fileSpace = angular.element('div.drop')[0]; // Get element to highlight file border when validation is false
-                        fileHeader = angular.element('div.drop')[0].parentElement.parentElement.getElementsByTagName('label')[0]; // Get element to highlight file header when validation is false
+                        fileHeader = angular.element('div.drop')[0].parentElement.parentElement; // Get element to highlight file header when validation is false
                         setWatch()
                     }, 1000);
                 }
@@ -29,14 +29,14 @@
                             if (myValue.vm.bindModel.length > 0) {
                                 myValue.vm.inputField = 'True';
                                 if (fileSpace.classList) {
-                                    fileSpace.classList.remove('trigger-validation');
-                                    fileHeader.classList.remove('trigger-validation-text');
+                                    fileSpace.classList.remove('has-error');
+                                    fileHeader.classList.remove('has-error');
                                 }
                             } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                                 myValue.vm.inputField = '';
                                 if (fileSpace.classList) {
-                                    fileSpace.classList.add('trigger-validation');
-                                    fileHeader.classList.add('trigger-validation-text');
+                                    fileSpace.classList.add('has-error');
+                                    fileHeader.classList.add('has-error');
                                 }
                             } else if (myValue.vm.bindModel.length === 0 && !myForm.submitted) {
                                 myValue.vm.inputField = '';
