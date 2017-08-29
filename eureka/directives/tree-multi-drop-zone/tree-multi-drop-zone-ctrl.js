@@ -39,7 +39,8 @@
 								vm.bindModel.push({
 									name: selectedItem.key,
 									displayName: selectedItem.displayName,
-									type: selectedItem.type
+
+								    type: selectedItem.type
 								});
 							}
 						}
@@ -63,8 +64,10 @@
 					function () {
 						let index = vm.bindModel.indexOf(itemToRemove);
 						if (index > -1) {
-							vm.bindModel.splice(index, 1);
-							vm.keys.split(index, 1);
+						    vm.bindModel.splice(index, 1);
+						    if (vm.keys) {
+							vm.keys.splice(index, 1);
+						    }
 						}
 					},
 					function (arg) {
