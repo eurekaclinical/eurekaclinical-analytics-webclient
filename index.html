@@ -12,6 +12,7 @@
 		<meta http-equiv="Pragma" content="no-cache"/> <!-- HTTP 1.0 -->
 	    <meta http-equiv="Expires" content="0"/> <!--prevents caching at the proxy server-->
 
+
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.22.2/angular-ui-tree.min.css" />
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -75,12 +76,17 @@ color: #fff;
                             </a>
                         </li>
                         <li>
+                            <a ui-sref="datasets">
+                                <i class="fa fa-pencil"></i>
+                                Datasets
+                            </a>
+                        </li>  
+                        <li>
                             <a ui-sref="jobs">
                                 <i class="fa fa-cog"></i>
                                 Jobs
                             </a>
-                        </li>
-                                
+                        </li> 
                         <li>
                             <a ui-sref="help">
                                 <i class="fa fa-question-circle"></i>
@@ -89,7 +95,6 @@ color: #fff;
                         </li>
                                     
                         <li>
-                            
                             <a class="dropdown-toggle" data-toggle="dropdown"
                                role="button" aria-expanded="false">
                                 <i class="fa fa-user"></i>
@@ -150,7 +155,7 @@ color: #fff;
         <!-- If you change the version of any of these libraries, you must also update the karma config. -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.min.js"></script>
+	    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.14/angular-messages.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -161,10 +166,10 @@ color: #fff;
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.7.4/ng-flow-standalone.min.js"></script>
         <script type="text/javascript" src="https://use.fontawesome.com/5e808755b2.js"></script>
         <script type="text/javascript" src="https://assets.eurekaclinical.org/v2.0a1/js/ec.bootbar.min.js"></script>
-	<script type="text/javascript" src="https://assets.eurekaclinical.org/v2.0a1/js/ec.idletimeout.min.js"></script>
+	    <script type="text/javascript" src="https://assets.eurekaclinical.org/v2.0a1/js/ec.idletimeout.min.js"></script>
         <script type="text/javascript" src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.4.0.js"></script>
         <script type="text/javascript" src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-validator/1.2.9/angular-validator.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-validator/1.2.9/angular-validator.min.js"></script> 
 		
         <!-- inject:js -->
         <!-- endinject -->
