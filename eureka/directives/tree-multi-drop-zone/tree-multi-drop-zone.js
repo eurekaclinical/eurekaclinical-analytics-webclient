@@ -22,6 +22,13 @@
                     let labelDropArea = angular.element(elem.parent()[0].children[0]); //Get label above drop are to highlight for validation
 
                     scope.$watch(function(myValue) {
+                        if(myValue.vm.isMultiDropzoneDirty === true){
+                            if(myValue.vm.dropZoneIndex){
+                                myForm["dropZoneMulti_"+myValue.vm.dropZoneIndex].$setDirty()
+                            } else {
+                                myForm["dropZoneMulti_"].$setDirty()
+                            } 
+                        }
                         if (myValue.vm.bindModel.length > 0) {
                             myValue.vm.isDropZonevalid = 'True';
                             labelDropArea.removeClass('trigger-validation-text');

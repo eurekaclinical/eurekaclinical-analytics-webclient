@@ -15,6 +15,7 @@
 		let vm = this;
 		//This dropZoneValid is for the hidden input field.  If there are items the dropZoneValid has text, which makes the hidden input field valid.
 		vm.isDropZonevalid = '';
+		vm.isDropzoneDirty = false;
 		vm.set = function () {
 			$uibModal.open({
 				templateUrl: 'setItemModal.html',
@@ -33,6 +34,7 @@
 					function () {
 					}
 			);
+			vm.isDropzoneDirty  = true;
 		};
 
 		vm.remove = function (itemToRemove) {
@@ -53,6 +55,7 @@
 					function (arg) {
 					}
 			);
+			vm.isDropzoneDirty  = true;
 		};
 
 		vm.populate = function () {
