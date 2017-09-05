@@ -14,6 +14,7 @@
 	function TreeMultiDropZoneCtrl($scope, PhenotypeService, TreeService, $uibModal) {
 		let vm = this;
 		vm.bindModel = [];
+		vm.isMultiDropzoneDirty = false;
 		//This dropZoneValid is for the hidden input field.  If there are items the dropZoneValid has text, which makes the hidden input field valid.
 	 	vm.isDropZonevalid = '';
 		vm.add = function () {
@@ -44,6 +45,7 @@
 								});
 							}
 						}
+						vm.isMultiDropzoneDirty  = true;
 					},
 					function () {
 					}
@@ -69,6 +71,7 @@
 							vm.keys.splice(index, 1);
 						    }
 						}
+						vm.isMultiDropzoneDirty  = true;
 					},
 					function (arg) {
 					}

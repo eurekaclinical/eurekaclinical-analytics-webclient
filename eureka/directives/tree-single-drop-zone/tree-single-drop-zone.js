@@ -21,6 +21,13 @@
                     let labelDropArea = angular.element(elem.parent()[0]); //Get label above drop are to highlight for validation
 
                     scope.$watch(function(myValue) {
+                        if(myValue.vm.isDropzoneDirty === true){
+                            if(myValue.vm.dropZoneIndex){
+                                myForm["dropZoneSingle_"+myValue.vm.dropZoneIndex].$setDirty()
+                            } else {
+                                myForm["dropZoneSingle_"].$setDirty()
+                            } 
+                        }
                         if (myValue.vm.bindModel) {
                             myValue.vm.isDropZonevalid = 'True';
                             labelDropArea.removeClass('has-error');
