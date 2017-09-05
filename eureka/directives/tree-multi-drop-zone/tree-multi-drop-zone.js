@@ -19,17 +19,17 @@
                 if (attrs.isRequired) {
                     let myForm = ngModel[1];
                     let currentDropArea = angular.element(elem.children()[1]); //Get current drop area to highlight for validation
-                    let labelDropArea = angular.element(elem.parent()[0].children[0]); //Get label above drop are to highlight for validation
+                    let labelDropArea = angular.element(elem.parent()[0]); //Get label above drop are to highlight for validation
 
                     scope.$watch(function(myValue) {
                         if (myValue.vm.bindModel.length > 0) {
                             myValue.vm.isDropZonevalid = 'True';
-                            labelDropArea.removeClass('trigger-validation-text');
-                            currentDropArea.removeClass('trigger-validation');
+                            labelDropArea.removeClass('has-error');
+                            currentDropArea.removeClass('has-error');
                         } else if (myValue.vm.bindModel.length === 0 && myForm.submitted) {
                             myValue.vm.isDropZonevalid = '';
-                            labelDropArea.addClass('trigger-validation-text');
-                            currentDropArea.addClass('trigger-validation');
+                            labelDropArea.addClass('has-error');
+                            currentDropArea.addClass('has-error');
                         } else if (myValue.vm.bindModel.length === 0 && !myForm.submitted){
                             myValue.vm.isDropZonevalid = '';
                         }
