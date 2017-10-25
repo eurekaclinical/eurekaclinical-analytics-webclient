@@ -54,10 +54,7 @@
         function getRole(roleId) {
             return $http.get(dataEndpoint+'/roles/' + roleId).then(function(res) {
                 return res.data;
-            }, function(err) {
-                console.error('role retrieval failed:', err);
-                return err;
-            });
+            }, handleError);
         }
 
         function getCurrentUser() {
@@ -66,14 +63,13 @@
 		    let userInfo = res.data;
 		    if (!userInfo) {
 			return $q.when(null);
+			
 		    }
 		    return $q.all(_.map(userInfo.roles, getRole)).then(function(roles) {
 			userInfo.roles = roles;
 			return new User(userInfo);
 		    });
-		}, function(err) {
-		    console.error('error getting user:', err);
-		});
+		}, handleError);
         }
 
         function handleSuccess(response) {
