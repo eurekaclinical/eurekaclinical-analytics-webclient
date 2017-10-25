@@ -79,13 +79,20 @@
 			UserService.getUser().then(function(user) {
 			    $rootScope.user = user;
 			    $rootScope.userVerficationPerformed = true;
+			}, function(msg) {
+			    // Session has gone bad, so destroy it.
+			    ProxyService.destroySession()
+				.then(function() {
+				    $rootScope.userVerficationPerformed = true;
+			        },
+				function() {
+				    $rootScope.userVerficationPerformed = true;
+				});
 			});
 		    }, function(msg) {
 			$rootScope.userVerficationPerformed = true;
 		    });
-	    }, function() {
-		$rootScope.userVerficationPerformed = true;
-	    })
+	    });
     }
 
     function eurekaConfig($urlRouterProvider){
