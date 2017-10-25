@@ -64,10 +64,10 @@
 	
 	$rootScope.inceptionYear = '2012';
 	$rootScope.currentYear = new Date().getFullYear();
-	$rootScope.service = function() {
+	$rootScope.service = (function() {
 	    var location = window.location;
 	    return location.protocol + '//' + location.host + location.pathname;
-	}();
+	}());
 	
 	CookieService.putIfValuePresent();
 	
