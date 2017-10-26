@@ -3,8 +3,7 @@
   <div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" 
        flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" 
        flow-file-success="prompt.onUploadSuccess($file)" 
-       flow-file-error="prompt.onUploadError($file, $message)"
-       flow-file-added="vm.fileAddedValidation( $file, $event, $flow )">
+       flow-file-error="prompt.onUploadError($file, $message)">
     <div class="drop form-control" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''" style="height:inherit; line-height:0%;">
       <span class="btn btn-primary" flow-btn>
         Choose file
