@@ -1,25 +1,25 @@
 <div class="form-group" ng-repeat="prompt in vm.prompts">
-	<label for="prompt_{{$index}}" class="control-label">{{prompt.option.displayName}} <span ng-if="prompt.required">(required)</span></label>
-<div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" 
-      flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" 
-      flow-file-success="prompt.onUploadSuccess($file)" 
-      flow-file-error="prompt.onUploadError($file, $message)"
-      flow-file-added="vm.fileAddedValidation( $file, $event, $flow )">
-<div class="drop form-control" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''" style="height:inherit; line-height:0%;">
-  <span class="btn btn-primary" flow-btn>
-  Choose file
-  <input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required" style="display: none;">
-  </span>
-  <strong>OR</strong>
-  Drag and drop your file here
-  <table>
-    <tr ng-repeat="file in $flow.files">
-      <td>{{file.name}}<a title="remove" ng-click="$flow.cancel()"><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a></td>
-    </tr>
-  </table>
+  <label for="prompt_{{$index}}" class="control-label">{{prompt.option.displayName}} <span ng-if="prompt.required">(required)</span></label>
+  <div flow-init="{singleFile: true, allowDuplicateUploads: true, testChunks: false}" 
+       flow-name="prompt.fileInput" ng-if="prompt.option.type === 'FILE'" 
+       flow-file-success="prompt.onUploadSuccess($file)" 
+       flow-file-error="prompt.onUploadError($file, $message)"
+       flow-file-added="vm.fileAddedValidation( $file, $event, $flow )">
+    <div class="drop form-control" flow-drop ng-class="vm.dropClass" flow-drag-enter="vm.dropClass='drag-over'" flow-drag-leave="vm.dropClass=''" style="height:inherit; line-height:0%;">
+      <span class="btn btn-primary" flow-btn>
+        Choose file
+        <input id="prompt_{{$index}}" name="prompt_{{$index}}" type="file" flow-btn class="form-control" accept="{{prompt.option.acceptedMimetypes.join('|')}}" ng-required="prompt.option.required" style="display: none;">
+      </span>
+      <strong>OR</strong>
+      Drag and drop your file here
+      <table>
+        <tr ng-repeat="file in $flow.files">
+          <td>{{file.name}}<a title="remove" ng-click="$flow.cancel()"><span class="glyphicon glyphicon-remove" title="" style="color:red;"></span></a></td>
+        </tr>
+      </table>
+    </div>
   </div>
-	</div>
-	<input ng-if="['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType)" id="prompt_{{$index}}" name="prompt_{{$index}}" type="number" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
-	<input ng-if="!['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType) && prompt.option.type !== 'FILE'" id="prompt_{{$index}}" name="prompt_{{$index}}" type="text" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
-<input  style="visibility:hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.inputField " name="fileUpload"  class="form-control" required required-message="'File is required'" />
+  <input ng-if="['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType)" id="prompt_{{$index}}" name="prompt_{{$index}}" type="number" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
+  <input ng-if="!['INTEGER', 'LONG', 'DOUBLE', 'FLOAT'].includes(prompt.option.propertyType) && prompt.option.type !== 'FILE'" id="prompt_{{$index}}" name="prompt_{{$index}}" type="text" class="form-control" ng-model="prompt.value" value="{{prompt.option.value}}" ng-required="prompt.option.required">
+  <input ng-if="prompt.option.type === 'FILE'" style="visibility: hidden; display:inline; padding:0px; height: 0; width: 0;" type="text" ng-model="vm.inputField" id="_prompt_{{$index}}" name="_prompt_{{$index}}" class="form-control" required-message="'File is required'" ng-required="prompt.option.required">
 </div>
