@@ -83,9 +83,10 @@
 		destinationId: vm.jobDestination.name,
 		dateRangePhenotypeKey: vm.dateRangeDropZoneItem ? vm.dateRangeDropZoneItem.key : null,
 		earliestDate: vm.earliestDate,
-		earliestDateSize: vm.earliestDateSide,
+		earliestDateSide: vm.earliestDateSide,
 		latestDate: vm.latestDate,
-		latestDateSize: vm.latestDateSide,
+		latestDateSide: vm.latestDateSide,
+		updateData: vm.radioData,
 		prompts: {
 		    id: vm.jobSourceConfig.id,
 		    dataSourceBackends: function () {

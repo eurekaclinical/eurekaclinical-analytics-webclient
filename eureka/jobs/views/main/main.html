@@ -71,10 +71,10 @@
 
 		<div class="form-group">
 			<label class="radio-inline">
-				<input type="radio" name="updateData" ng-model="jobs.radioData" value="1" required required-message="'Must select Replace or Update'">Replace Data
+				<input type="radio" name="updateData" ng-model="jobs.radioData" ng-value="false" required>Replace Data
 			</label>
 			<label class="radio-inline">
-				<input type="radio" name="updateData" ng-model="jobs.radioData" value="2">Update Data
+				<input type="radio" name="updateData" ng-model="jobs.radioData" ng-value="true">Update Data
 			</label> 
 		</div>
 	</fieldset>
