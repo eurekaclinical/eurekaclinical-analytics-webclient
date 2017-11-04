@@ -11,9 +11,9 @@
 
     angular.module('eureka.index').config(indexConfig);
     
-    indexConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
+    indexConfig.$inject = ['$stateProvider'];
 
-    function indexConfig($stateProvider, $urlRouterProvider, $httpProvider){
+    function indexConfig($stateProvider){
         $stateProvider
             .state('index', {
                 url: '/index',

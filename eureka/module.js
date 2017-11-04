@@ -49,7 +49,7 @@
     angular.module('eureka').config(eurekaConfig);
 
     eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', 'CookieService'];
-    eurekaConfig.$inject = ['$urlRouterProvider'];
+    eurekaConfig.$inject = ['$urlRouterProvider', '$httpProvider'];
 
     function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, CookieService) {
         
@@ -95,7 +95,8 @@
 	    });
     }
 
-    function eurekaConfig($urlRouterProvider){
+    function eurekaConfig($urlRouterProvider, $httpProvider){
+	$httpProvider.defaults.withCredentials = true;
 	$urlRouterProvider.otherwise('/index');
     }
     
