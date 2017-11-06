@@ -60,9 +60,32 @@ gulp.task('webserver', function () {
     gulp.src('target')
 	.pipe(webserver({
 	    open: true,
-	    https: true,
+	    https: {
+		key: 'pki/key.pem',
+		cert: 'pki/cert.pem'
+	    },
 	    middleware: [
 		proxy('/eureka-webapp', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
+		proxy('/eureka-services', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
+		proxy('/eureka-protempa-etl', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
+		proxy('/cas-server', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
+		proxy('/eurekaclinical-user-webapp', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
+		proxy('/eurekaclinical-user-service', {
 		    target: 'https://localhost:8443',
 		    secure: false
 		})

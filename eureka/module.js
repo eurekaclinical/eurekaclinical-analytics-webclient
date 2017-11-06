@@ -49,16 +49,9 @@
     angular.module('eureka').config(eurekaConfig);
 
     eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', 'CookieService'];
-    eurekaConfig.$inject = ['$urlRouterProvider', '$httpProvider'];
+    eurekaConfig.$inject = ['$urlRouterProvider'];
 
     function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, CookieService) {
-        
-        ProxyService.getAppProperties()
-            .then(function(data) {
-		$rootScope.modes = data.appPropertiesModes;
-		$rootScope.links = data.appPropertiesLinks;
-		$rootScope.registration = data.appPropertiesRegistration;
-            });
         
 	$rootScope.userVerficationPerformed = false;
 	
@@ -70,33 +63,44 @@
 	}());
 	
 	CookieService.putIfValuePresent();
+
+	function sessionBroken() {
+	    ProxyService.destroySession()
+		.then(function() {
+		    $rootScope.userVerficationPerformed = true;
+		},
+		      function() {
+			  $rootScope.userVerficationPerformed = true;
+		      });
+	}
 	
 	ConfigFileService.getConfig()
 	    .then(function(data) {
 		$rootScope.casLoginUrl = data.casLoginUrl;
-		ProxyService.getSession()
-		    .then(function() {
-			UserService.getUser().then(function(user) {
-			    $rootScope.user = user;
-			    $rootScope.userVerficationPerformed = true;
-			}, function(msg) {
-			    // Session has gone bad, so destroy it.
-			    ProxyService.destroySession()
-				.then(function() {
-				    $rootScope.userVerficationPerformed = true;
-			        },
-				function() {
-				    $rootScope.userVerficationPerformed = true;
-				});
-			});
-		    }, function(msg) {
-			$rootScope.userVerficationPerformed = true;
-		    });
+		ProxyService.getAppProperties()
+			    .then(function(data) {
+				$rootScope.modes = data.appPropertiesModes;
+				$rootScope.links = data.appPropertiesLinks;
+				$rootScope.registration = data.appPropertiesRegistration;
+				ProxyService.getSession()
+				    .then(function() {
+					UserService.getUser().then(function(user) {
+					    $rootScope.user = user;
+					    $rootScope.userVerficationPerformed = true;
+					}, function() {
+					    // Session has gone bad, so destroy it.
+					    sessionBroken();
+					});
+				    }, function() {
+					sessionBroken();
+				    });
+			    }, function() {
+		    		sessionBroken();
+			    });
 	    });
     }
 
-    function eurekaConfig($urlRouterProvider, $httpProvider){
-	$httpProvider.defaults.withCredentials = true;
+    function eurekaConfig($urlRouterProvider) {
 	$urlRouterProvider.otherwise('/index');
     }
     

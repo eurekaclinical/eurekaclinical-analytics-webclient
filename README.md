@@ -54,7 +54,8 @@ following:
 project from GitHub, and execute `mvn clean install`
 followed by `mvn tomcat7:run` in the root directory of the eureka
 project on the command line to run the server-side Eureka! Clinical
-Analytics code in embedded tomcat.
+Analytics code in embedded tomcat. The backend services must be
+listening on port 8443, which is the default.
 2. Back in the root directory of the web client project, execute
 `mvn clean install -Pwebserver`. It will open the web client in your
 default web browser at https://localhost:8000 in an embedded web
@@ -70,16 +71,15 @@ This web client is configured using a JSON file, `config.json`, that
 should be in the same directory as the index.html file on your web
 server. It supports specifying the following options:
 * `casLoginUrl`: The URL for logging into your CAS server. The default
-  value is `https://localhost:8443/cas-server/login`.
+  value is `https://localhost:8000/cas-server/login`.
 * `logoutUrl`: The URL that the web client will go to when the user
   clicks the `Logout` click in the upper right corner of the
   page. Before going to this URL, the web client will destroy the
   user's session. The default value is
-  `https://localhost:8443/cas-server/logout`, which logs the user out
+  `https://localhost:8000/cas-server/logout`, which logs the user out
   of CAS.
-* `eurekaWebappUrl`: The URL for eureka-webapp, which is the proxy for
-  this web client. The default value is
-  `https://localhost:8443/eureka-webapp`.
+* `eurekaWebappUrl`: The URL for eureka-webapp. The default value is
+  `https://localhost:8000/eureka-webapp`.
 
 Specify the options as properties of a single JSON object. See the
 default `config.json` file in the root directory of this project for a
