@@ -111,7 +111,7 @@
 					type: vm.conceptOrPhenotype.type
 				},
 				atLeast: vm.threshold,
-				isConsecutive: vm.conceptOrPhenotype === 'VALUE_THRESHOLD' ? vm.isConsecutive : false,
+				isConsecutive: vm.conceptOrPhenotype.type === 'VALUE_THRESHOLD' ? vm.isConsecutive : false,
 				frequencyType: vm.frequencyType,
 				type: 'FREQUENCY'
 			};
