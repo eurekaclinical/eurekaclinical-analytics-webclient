@@ -33,7 +33,6 @@
 
 	function remove() {
 	    $cookies.remove(cookieName);
-	    $cookies.remove('JSESSIONID');
 	}
 
 	function putIfValuePresent() {
@@ -42,7 +41,7 @@
 	    match = /ticket=([^&#]*)/.exec(adr);
 	    var ticket = match ? match[1] : null;
 	    if (ticket) {
-		$cookies.put(cookieName, ticket);
+		$cookies.put(cookieName, ticket, {secure: true});
 	    }
 	}
         
