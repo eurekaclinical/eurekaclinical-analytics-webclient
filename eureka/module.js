@@ -48,10 +48,10 @@
     angular.module('eureka').run(eurekaRun);
     angular.module('eureka').config(eurekaConfig);
 
-    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', 'CookieService'];
+    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService'];
     eurekaConfig.$inject = ['$urlRouterProvider'];
 
-    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, CookieService) {
+    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService) {
         
 	$rootScope.userVerficationPerformed = false;
 	
@@ -61,8 +61,6 @@
 	    var location = window.location;
 	    return location.protocol + '//' + location.host + location.pathname;
 	}());
-	
-	CookieService.putIfValuePresent();
 
 	function sessionBroken() {
 	    ProxyService.destroySession()

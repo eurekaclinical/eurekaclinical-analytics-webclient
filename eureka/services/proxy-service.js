@@ -13,9 +13,9 @@
         .module('eureka')
         .factory('ProxyService', ProxyService);
 
-    ProxyService.$inject = ['$http', '$q', 'ConfigFileService', 'CookieService'];
+    ProxyService.$inject = ['$http', '$q', 'ConfigFileService'];
 
-    function ProxyService($http, $q, ConfigFileService, CookieService) {
+    function ProxyService($http, $q, ConfigFileService) {
         var dataProtectedEndPoint = getProtectedEndpoint();
 	var dataEndpoint = getDataEndpoint();
 	var dataOpenEndpoint = getOpenEndpoint();
@@ -51,7 +51,6 @@
 	}
 
 	function destroySession() {
-	    CookieService.remove();
 	    return $http.get(dataOpenEndpoint + '/destroy-session')
 		.then(handleSuccess, handleError);
 	}
