@@ -48,10 +48,10 @@
     angular.module('eureka').run(eurekaRun);
     angular.module('eureka').config(eurekaConfig);
 
-    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService'];
+    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', '$timeout'];
     eurekaConfig.$inject = ['$urlRouterProvider'];
 
-    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService) {
+    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, $timeout) {
         
 	$rootScope.userVerficationPerformed = false;
 	
@@ -99,7 +99,7 @@
 		});
 	}
 	// Wait until the next digest cycle to run so that $cookies is updated.
-	$rootScope.$evalAsync(setupSession);
+	$timeout(setupSession);
     }
 
     function eurekaConfig($urlRouterProvider) {

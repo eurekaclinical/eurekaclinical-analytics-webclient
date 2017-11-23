@@ -7,13 +7,15 @@
     registerTeardown();
 
     describe('PhenotypeService', function() {
-        var PhenotypeService;
+        var PhenotypeService, $timeout;
 
-	beforeEach(inject(function(_PhenotypeService_) {
+	beforeEach(inject(function(_PhenotypeService_, $injector) {
 	    PhenotypeService = _PhenotypeService_;
+	    $timeout = $injector.get('$timeout')
         }));
 
 	it('should be defined', function() {
+	    $timeout.flush();
             expect(PhenotypeService).toBeDefined();
 	    $httpBackend.flush();
         });
