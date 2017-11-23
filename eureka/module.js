@@ -82,7 +82,7 @@
 			    $rootScope.links = data.appPropertiesLinks;
 			    $rootScope.registration = data.appPropertiesRegistration;
 			    ProxyService.getSession()
-				.then(function() {
+				.then($timeout(function() {
 				    UserService.getUser().then(function(user) {
 					$rootScope.user = user;
 					$rootScope.userVerficationPerformed = true;
@@ -90,7 +90,7 @@
 					// Session has gone bad, so destroy it.
 					sessionBroken();
 				    });
-				}, function() {
+				}, 150), function() {
 				    sessionBroken();
 				});
 			}, function() {
@@ -99,7 +99,7 @@
 		});
 	}
 	// Wait until the next digest cycle to run so that $cookies is updated.
-	$timeout(setupSession);
+	setupSession();
     }
 
     function eurekaConfig($urlRouterProvider) {
