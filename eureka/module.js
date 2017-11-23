@@ -62,40 +62,44 @@
 	    return location.protocol + '//' + location.host + location.pathname;
 	}());
 
-	function sessionBroken() {
-	    ProxyService.destroySession()
-		.then(function() {
-		    $rootScope.userVerficationPerformed = true;
-		},
-		      function() {
-			  $rootScope.userVerficationPerformed = true;
-		      });
-	}
-	
-	ConfigFileService.getConfig()
-	    .then(function(data) {
-		$rootScope.casLoginUrl = data.casLoginUrl;
-		ProxyService.getAppProperties()
-			    .then(function(data) {
-				$rootScope.modes = data.appPropertiesModes;
-				$rootScope.links = data.appPropertiesLinks;
-				$rootScope.registration = data.appPropertiesRegistration;
-				ProxyService.getSession()
-				    .then(function() {
-					UserService.getUser().then(function(user) {
-					    $rootScope.user = user;
-					    $rootScope.userVerficationPerformed = true;
-					}, function() {
-					    // Session has gone bad, so destroy it.
-					    sessionBroken();
-					});
+	function setupSession() {
+	    function sessionBroken() {
+		ProxyService.destroySession()
+		    .then(function() {
+			$rootScope.userVerficationPerformed = true;
+		    },
+			  function() {
+			      $rootScope.userVerficationPerformed = true;
+			  });
+	    }
+	    
+	    ConfigFileService.getConfig()
+		.then(function(data) {
+		    $rootScope.casLoginUrl = data.casLoginUrl;
+		    ProxyService.getAppProperties()
+			.then(function(data) {
+			    $rootScope.modes = data.appPropertiesModes;
+			    $rootScope.links = data.appPropertiesLinks;
+			    $rootScope.registration = data.appPropertiesRegistration;
+			    ProxyService.getSession()
+				.then(function() {
+				    UserService.getUser().then(function(user) {
+					$rootScope.user = user;
+					$rootScope.userVerficationPerformed = true;
 				    }, function() {
+					// Session has gone bad, so destroy it.
 					sessionBroken();
 				    });
-			    }, function() {
-		    		sessionBroken();
-			    });
-	    });
+				}, function() {
+				    sessionBroken();
+				});
+			}, function() {
+		    	    sessionBroken();
+			});
+		});
+	}
+	// Wait until the next digest cycle to run so that $cookies is updated.
+	$rootScope.$evalAsync(setupSession);
     }
 
     function eurekaConfig($urlRouterProvider) {
