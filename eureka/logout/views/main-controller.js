@@ -13,9 +13,9 @@
         .module('eureka.logout')
         .controller('logout.MainCtrl', MainCtrl);
     
-    MainCtrl.$inject = ['ProxyService', 'ConfigFileService'];
+    MainCtrl.$inject = ['$rootScope', 'ProxyService'];
 
-    function MainCtrl(ProxyService, ConfigFileService) {
+    function MainCtrl($rootScope, ProxyService) {
         var vm = this;
 
 	vm.inProgress = true;
@@ -26,13 +26,7 @@
 	function success() {
 	    vm.inProgress = false;
 	    vm.success = true;
-	    ConfigFileService.getConfig()
-		.then(function (data) {
-		    window.location.href = data.logoutUrl;
-		}, function (msg) {
-		    error(msg);
-		});
-	    
+	    window.location.href = $rootScope.logoutUrl;
 	}
 
 	function error(msg) {

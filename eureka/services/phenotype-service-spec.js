@@ -7,15 +7,22 @@
     registerTeardown();
 
     describe('PhenotypeService', function() {
-        var PhenotypeService, $timeout;
+        var userElements, PhenotypeService;
 
-	beforeEach(inject(function(_PhenotypeService_, $injector) {
-	    PhenotypeService = _PhenotypeService_;
-	    $timeout = $injector.get('$timeout')
+	beforeEach(inject(function(_PhenotypeService_) {
+	    PhenotypeService = _PhenotypeService_;      
         }));
 
+	beforeEach(function() {
+	    userElements = {
+                blah: 'test'
+            };
+	    $httpBackend.whenGET(
+		'https://localhost:8000/cas-server/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
+                .respond(userElements);
+	});
+
 	it('should be defined', function() {
-	    $timeout.flush();
             expect(PhenotypeService).toBeDefined();
 	    $httpBackend.flush();
         });
@@ -29,12 +36,22 @@
 	    PhenotypeService = _PhenotypeService_;
         }));
 
+	beforeEach(function() {
+	    userElements = {
+                blah: 'test'
+            };
+	    $httpBackend.whenGET(
+		'https://localhost:8000/cas-server/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
+                .respond(userElements);
+	});
+
         beforeEach(function () {
             userElements = {
                 blah: 'test'
             };
             $httpBackend.whenGET('eureka-webapp/proxy-resource/phenotypes?summarize=true')
                 .respond(userElements);
+	    
         });
 
         it('should get the user phenotypes', function() {

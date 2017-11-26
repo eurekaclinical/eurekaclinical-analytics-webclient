@@ -13,9 +13,9 @@
         .module('eureka')
         .factory('ProxyService', ProxyService);
 
-    ProxyService.$inject = ['$http', '$q', 'ConfigFileService'];
+    ProxyService.$inject = ['$http', '$q'];
 
-    function ProxyService($http, $q, ConfigFileService) {
+    function ProxyService($http, $q) {
         var dataProtectedEndPoint = getProtectedEndpoint();
 	var dataEndpoint = getDataEndpoint();
 	var dataOpenEndpoint = getOpenEndpoint();
@@ -43,11 +43,8 @@
 	}
 
 	function getSession() {
-	    return ConfigFileService.getConfig()
-		.then(function (data) {
-		    return getEurekaClinicalSession()
-			.then(handleSuccess, handleError);
-		}, handleError);
+	    return $http.get(dataProtectedEndPoint + '/get-session')
+		.then(handleSuccess, handleError);
 	}
 
 	function destroySession() {
@@ -79,11 +76,6 @@
 	    }
 	    return ($q.reject(response.data));
         }
-
-	function getEurekaClinicalSession() {
-	    return $http.get(dataProtectedEndPoint + '/get-session')
-		.then(handleSuccess, handleError);
-	}
 
     }
 

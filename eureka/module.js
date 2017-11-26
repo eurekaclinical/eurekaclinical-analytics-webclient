@@ -48,10 +48,10 @@
     angular.module('eureka').run(eurekaRun);
     angular.module('eureka').config(eurekaConfig);
 
-    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', '$timeout'];
+    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService'];
     eurekaConfig.$inject = ['$urlRouterProvider'];
 
-    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, $timeout) {
+    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService) {
         
 	$rootScope.userVerficationPerformed = false;
 	
@@ -67,38 +67,48 @@
 		ProxyService.destroySession()
 		    .then(function() {
 			$rootScope.userVerficationPerformed = true;
+			if (parseTicket()) {
+			    window.location.href = $rootScope.service;
+			}
 		    },
 			  function() {
 			      $rootScope.userVerficationPerformed = true;
 			  });
 	    }
+
+	    function parseTicket() {
+		var match, i;
+		var adr = location.href;
+		match = /ticket=([^&#]*)/.exec(adr);
+		return match ? match[1] : null;
+	    }
 	    
 	    ConfigFileService.getConfig()
 		.then(function(data) {
 		    $rootScope.casLoginUrl = data.casLoginUrl;
+		    $rootScope.logoutUrl = data.logoutUrl;
 		    ProxyService.getAppProperties()
 			.then(function(data) {
 			    $rootScope.modes = data.appPropertiesModes;
 			    $rootScope.links = data.appPropertiesLinks;
 			    $rootScope.registration = data.appPropertiesRegistration;
 			    ProxyService.getSession()
-				.then($timeout(function() {
+				.then(function() {
 				    UserService.getUser().then(function(user) {
 					$rootScope.user = user;
 					$rootScope.userVerficationPerformed = true;
 				    }, function() {
-					// Session has gone bad, so destroy it.
 					sessionBroken();
 				    });
-				}, 150), function() {
-				    sessionBroken();
+				}, function() {
+				    $rootScope.userVerficationPerformed = true;
 				});
 			}, function() {
 		    	    sessionBroken();
 			});
 		});
 	}
-	// Wait until the next digest cycle to run so that $cookies is updated.
+	
 	setupSession();
     }
 
