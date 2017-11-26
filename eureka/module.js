@@ -66,10 +66,10 @@
 	    function sessionBroken() {
 		ProxyService.destroySession()
 		    .then(function() {
-			$rootScope.userVerficationPerformed = true;
 			if (parseTicket()) {
 			    window.location.href = $rootScope.service;
 			}
+			$rootScope.userVerficationPerformed = true;
 		    },
 			  function() {
 			      $rootScope.userVerficationPerformed = true;
@@ -101,6 +101,9 @@
 					sessionBroken();
 				    });
 				}, function() {
+				    if (parseTicket()) {
+					window.location.href = $rootScope.service;
+				    }
 				    $rootScope.userVerficationPerformed = true;
 				});
 			}, function() {
