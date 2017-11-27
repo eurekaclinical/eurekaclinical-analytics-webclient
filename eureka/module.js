@@ -68,8 +68,9 @@
 		    .then(function() {
 			if (parseTicket()) {
 			    window.location.href = $rootScope.service;
+			} else {
+			    $rootScope.userVerficationPerformed = true;
 			}
-			$rootScope.userVerficationPerformed = true;
 		    },
 			  function() {
 			      $rootScope.userVerficationPerformed = true;
@@ -82,33 +83,44 @@
 		match = /ticket=([^&#]*)/.exec(adr);
 		return match ? match[1] : null;
 	    }
+
+	    function getAppProperties() {
+		ProxyService.getAppProperties()
+		    .then(function(data) {
+			$rootScope.modes = data.appPropertiesModes;
+			$rootScope.links = data.appPropertiesLinks;
+			$rootScope.registration = data.appPropertiesRegistration;
+			$rootScope.userVerficationPerformed = true;
+		    }, function() {
+			sessionBroken();
+		    });
+	    }
+
+	    function getUser() {
+		UserService.getUser().then(function(user) {
+		    $rootScope.user = user;
+		    getAppProperties();
+		}, function() {
+		    sessionBroken();
+		});
+	    }
 	    
 	    ConfigFileService.getConfig()
 		.then(function(data) {
 		    $rootScope.casLoginUrl = data.casLoginUrl;
 		    $rootScope.logoutUrl = data.logoutUrl;
-		    ProxyService.getAppProperties()
-			.then(function(data) {
-			    $rootScope.modes = data.appPropertiesModes;
-			    $rootScope.links = data.appPropertiesLinks;
-			    $rootScope.registration = data.appPropertiesRegistration;
-			    ProxyService.getSession()
-				.then(function() {
-				    UserService.getUser().then(function(user) {
-					$rootScope.user = user;
-					$rootScope.userVerficationPerformed = true;
-				    }, function() {
-					sessionBroken();
-				    });
-				}, function() {
-				    if (parseTicket()) {
-					window.location.href = $rootScope.service;
-				    }
-				    $rootScope.userVerficationPerformed = true;
-				});
+		    ProxyService.getSession()
+			.then(function() {
+			    getUser();
 			}, function() {
-		    	    sessionBroken();
+			    if (parseTicket()) {
+				window.location.href = $rootScope.service;
+			    } else {
+				getAppProperties();
+			    }
 			});
+		}, function() {
+		    sessionBroken();
 		});
 	}
 	
