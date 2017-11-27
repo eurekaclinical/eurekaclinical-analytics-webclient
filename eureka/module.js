@@ -48,40 +48,39 @@
     angular.module('eureka').run(eurekaRun);
     angular.module('eureka').config(eurekaConfig);
 
-    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService'];
+    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', '$window', '$timeout'];
     eurekaConfig.$inject = ['$urlRouterProvider'];
 
-    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService) {
+    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, $window, $timeout) {
         
 	$rootScope.userVerficationPerformed = false;
 	
-	$rootScope.inceptionYear = '2012';
-	$rootScope.currentYear = new Date().getFullYear();
 	$rootScope.service = (function() {
-	    var location = window.location;
+	    var location = $window.location;
 	    return location.protocol + '//' + location.host + location.pathname;
 	}());
+
+	function parseTicket() {
+	    var match, i;
+	    var adr = location.href;
+	    match = /ticket=([^&#]*)/.exec(adr);
+	    return match ? match[1] : null;
+	}
+
+	$rootScope.inceptionYear = '2012';
+	$rootScope.currentYear = new Date().getFullYear();
 
 	function setupSession() {
 	    function sessionBroken() {
 		ProxyService.destroySession()
 		    .then(function() {
-			if (parseTicket()) {
-			    window.location.href = $rootScope.service;
-			} else {
-			    $rootScope.userVerficationPerformed = true;
-			}
+			$timeout(function() {
+			    $window.location.href = $rootScope.service;
+			}, 500);
 		    },
 			  function() {
 			      $rootScope.userVerficationPerformed = true;
 			  });
-	    }
-
-	    function parseTicket() {
-		var match, i;
-		var adr = location.href;
-		match = /ticket=([^&#]*)/.exec(adr);
-		return match ? match[1] : null;
 	    }
 
 	    function getAppProperties() {
@@ -111,10 +110,13 @@
 		    $rootScope.logoutUrl = data.logoutUrl;
 		    ProxyService.getSession()
 			.then(function() {
+			    if (parseTicket()) {
+				$window.location.href = $rootScope.service;
+			    }
 			    getUser();
 			}, function() {
 			    if (parseTicket()) {
-				window.location.href = $rootScope.service;
+				$window.location.href = $rootScope.service;
 			    } else {
 				getAppProperties();
 			    }
