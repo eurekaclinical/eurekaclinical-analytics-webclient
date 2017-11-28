@@ -52,23 +52,17 @@
         };
 
         function getRole(roleId) {
-            return $http.get(dataEndpoint+'/roles/' + roleId).then(function(res) {
-                return res.data;
-            }, handleError);
+            return $http.get(dataEndpoint+'/roles/' + roleId).then(handleSuccess, handleError);
         }
 
         function getCurrentUser() {
             return $http.get(dataEndpoint+'/users/me')
-		.then(function(res) {
-		    let userInfo = res.data;
-		    if (!userInfo) {
-			return $q.when(null);
-			
-		    }
+		.then(handleSuccess, handleError)
+		.then(function(userInfo) {
 		    return $q.all(_.map(userInfo.roles, getRole)).then(function(roles) {
 			userInfo.roles = roles;
 			return new User(userInfo);
-		    });
+		    }, handleError);
 		}, handleError);
         }
 
