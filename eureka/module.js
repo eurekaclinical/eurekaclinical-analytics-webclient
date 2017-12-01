@@ -108,6 +108,7 @@
 		.then(function(data) {
 		    $rootScope.casLoginUrl = data.casLoginUrl;
 		    $rootScope.logoutUrl = data.logoutUrl;
+		    $rootScope.userWebappUrl = data.userWebappUrl; //temp solution
 		    ProxyService.getSession()
 			.then(function() {
 			    if (parseTicket()) {
@@ -121,8 +122,9 @@
 				getAppProperties();
 			    }
 			});
-		}, function() {
-		    sessionBroken();
+		}, function(msg) {
+		    console.log(msg);
+		    $rootScope.userVerficationPerformed = true;
 		});
 	}
 	
