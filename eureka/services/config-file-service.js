@@ -10,8 +10,8 @@
     angular
 	.module('eureka')
 	.service('ConfigFileService',
-		 ['$http',
-		  function ($http) {
+		 ['$http', '$q',
+		  function ($http, $q) {
 		      return {
 			  getConfig: getConfig
 		      };
@@ -30,7 +30,7 @@
 			      if (response.statusText) {
 				  return ($q.reject(response.statusText));
 			      } else {
-				  return ($q.reject('The server may be down.'));
+				  return ($q.reject('The config file is missing or malformed.'));
 			      }
 			  }
 			  return ($q.reject(response.data));
