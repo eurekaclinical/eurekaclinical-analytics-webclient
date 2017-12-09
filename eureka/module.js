@@ -54,19 +54,6 @@
     function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, $window, $timeout) {
         
 	$rootScope.userVerficationPerformed = false;
-	
-	$rootScope.service = (function() {
-	    var location = $window.location;
-	    return location.protocol + '//' + location.host + location.pathname;
-	}());
-
-	function parseTicket() {
-	    var match, i;
-	    var adr = location.href;
-	    match = /ticket=([^&#]*)/.exec(adr);
-	    return match ? match[1] : null;
-	}
-
 	$rootScope.inceptionYear = '2012';
 	$rootScope.currentYear = new Date().getFullYear();
 
@@ -100,30 +87,18 @@
 		    $rootScope.user = user;
 		    getAppProperties();
 		}, function() {
-		    sessionBroken();
+		    getAppProperties();
 		});
 	    }
 	    
 	    ConfigFileService.getConfig()
 		.then(function(data) {
-		    $rootScope.casLoginUrl = data.casLoginUrl;
+		    $rootScope.service = data.webClientUrl;
 		    $rootScope.logoutUrl = data.logoutUrl;
 		    $rootScope.userWebappUrl = data.userWebappUrl; //temp solution
-		    ProxyService.getSession()
-			.then(function() {
-			    if (parseTicket()) {
-				$window.location.href = $rootScope.service;
-			    }
-			    getUser();
-			}, function() {
-			    if (parseTicket()) {
-				$window.location.href = $rootScope.service;
-			    } else {
-				getAppProperties();
-			    }
-			});
+		    $rootScope.eurekaWebappUrl = data.eurekaWebappUrl;
+		    getUser();
 		}, function(msg) {
-		    console.log(msg);
 		    $rootScope.userVerficationPerformed = true;
 		});
 	}
