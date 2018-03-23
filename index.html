@@ -88,23 +88,16 @@ color: #fff;
                                     
                         <li>
                             
-                            <a class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-expanded="false">
-                                <i class="fa fa-user"></i>
-                                {{user.getDisplayName()}}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{userWebappUrl}}/protected/user_acct">
-                                        <i class="fa fa-user"></i>
-                                        Account Settings
-                                    </a>
-                                </li>
-                                <li ng-if="user.hasRole('admin')">
-                                    <a href="{{userWebappUrl}}/protected/admin?action=list">
-                                        <i class="fa fa-wrench"></i>
-                                        Administration
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+			    <i class="fa fa-user"></i>
+			    {{user.getDisplayName()}}
+			    <span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="menuItem in registryUserMenuItems">
+			            <a href="{{menuItem.url}}">
+			                <i class="fa fa-link"></i>
+                                        {{menuItem.displayName}}
                                     </a>
                                 </li>
                                 <li>
