@@ -7,7 +7,7 @@
     registerTeardown();
 
     describe('PhenotypeService', function() {
-        var userElements, PhenotypeService;
+        var userElements, registryUserMenuItems, PhenotypeService;
 
 	beforeEach(inject(function(_PhenotypeService_) {
 	    PhenotypeService = _PhenotypeService_;      
@@ -22,6 +22,13 @@
                 .respond(userElements);
 	});
 
+	beforeEach(function() {
+	    registryUserMenuItems = [];
+	    $httpBackend.whenGET(
+		'eureka-webapp/proxy-resource/components?type=WEBAPP&type=EXTERNAL')
+                .respond(registryUserMenuItems);
+	});
+
 	it('should be defined', function() {
             expect(PhenotypeService).toBeDefined();
 	    $httpBackend.flush();
@@ -30,7 +37,7 @@
     });
 
     describe('getPhenotypeRoot', function() {
-        var userElements, PhenotypeService;
+        var userElements, registryUserMenuItems, PhenotypeService;
 
 	beforeEach(inject(function(_PhenotypeService_) {
 	    PhenotypeService = _PhenotypeService_;
@@ -50,9 +57,15 @@
                 blah: 'test'
             };
             $httpBackend.whenGET('eureka-webapp/proxy-resource/phenotypes?summarize=true')
-                .respond(userElements);
-	    
+                .respond(userElements); 
         });
+
+	beforeEach(function() {
+	    registryUserMenuItems = [];
+	    $httpBackend.whenGET(
+		'eureka-webapp/proxy-resource/components?type=WEBAPP&type=EXTERNAL')
+                .respond(registryUserMenuItems);
+	});
 
         it('should get the user phenotypes', function() {
             PhenotypeService.getPhenotypeRoot().then(function(res) {
