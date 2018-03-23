@@ -48,10 +48,10 @@
     angular.module('eureka').run(eurekaRun);
     angular.module('eureka').config(eurekaConfig);
 
-    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', '$window', '$timeout'];
+    eurekaRun.$inject = ['$rootScope', 'ProxyService', 'UserService', 'ConfigFileService', 'RegistryService', '$window', '$timeout'];
     eurekaConfig.$inject = ['$urlRouterProvider'];
 
-    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, $window, $timeout) {
+    function eurekaRun($rootScope, ProxyService, UserService, ConfigFileService, RegistryService, $window, $timeout) {
         
 	$rootScope.userVerficationPerformed = false;
 	$rootScope.inceptionYear = '2012';
@@ -86,8 +86,15 @@
 		UserService.getUser().then(function(user) {
 		    $rootScope.user = user;
 		    getAppProperties();
+		    getRegistryUserMenuItems();
 		}, function() {
 		    getAppProperties();
+		});
+	    }
+
+	    function getRegistryUserMenuItems() {
+		RegistryService.getUserMenuItems().then(function(userMenuItems) {
+		    $rootScope.registryUserMenuItems = userMenuItems;
 		});
 	    }
 	    
