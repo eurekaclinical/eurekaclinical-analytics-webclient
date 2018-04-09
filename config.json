@@ -1,6 +1,6 @@
 {
     "webClientUrl": "https://localhost:8000",
-    "logoutUrl": "https://localhost:8000/cas-server/logout",
-    "eurekaWebappUrl": "https://localhost:8000/eureka-webapp",
+    "logoutUrl": "https://localhost:8000/cas-mock/logout",
+    "eurekaWebappUrl": "https://localhost:8000/eurekaclinical-analytics-webapp",
     "userWebappUrl": "https://localhost:8000/eurekaclinical-user-webapp"
 }

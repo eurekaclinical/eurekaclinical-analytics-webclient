@@ -16,7 +16,6 @@
     TreeService.$inject = ['$http', '$q', 'ProxyService'];
 
     function TreeService($http, $q, ProxyService) {
-        var dataEndpoint = ProxyService.getDataEndpoint();
 
         return ({
             getTreeRoot: getTreeRoot,
@@ -25,17 +24,22 @@
         });
 
         function getTreeRoot() {
-            return $http.get(dataEndpoint + '/concepts')
-                .then(handleSuccess, handleError);
+            return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/concepts')
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function getTreeNode(key) {
             if (key === 'root') {
-                return $http.get(dataEndpoint + '/concepts/')
-                    .then(handleSuccess, handleError);
-            } else {
-		let postBody = 'key=' + key;
-                return $http.post(dataEndpoint + '/concepts', postBody)
+		return ProxyService.getDataEndpoint().then(function(url) {
+                    return $http.get(url + '/concepts/')
+			.then(handleSuccess, handleError);
+		}, handleError);
+	    } else {
+		return ProxyService.getDataEndpoint().then(function(url) {
+		    let postBody = 'key=' + key;
+		    return $http.post(url + '/concepts', postBody)
 		    .then(
 			function(response) {
 			    if (response.data.length > 0) {
@@ -45,6 +49,8 @@
 			    }
 			}, 
 			handleError);
+		}, handleError);
+                
             }
         }
 
@@ -57,12 +63,13 @@
 		postBody += '&';
 		postBody += 'key=' + keys[i];
 	    }
-	    return $http.post(dataEndpoint + '/concepts', postBody)
-		.then(
-		    function(response) {
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.post(url + '/concepts', postBody)
+		    .then(function(response) {
 			return response.data;
 		    }, 
-		    handleError);
+			  handleError);
+	    }, handleError);
         }
 
         function handleSuccess(response) {

@@ -17,8 +17,7 @@
     JobService.$inject = ['$http', '$q', 'ProxyService'];
 
     function JobService($http, $q, ProxyService) {
-
-	var dataEndpoint = ProxyService.getDataEndpoint();
+	
 	return ({
 	    submitJob: submitJob,
 	    getJobs: getJobs,
@@ -29,36 +28,49 @@
 	});
 
 	function submitJob(jobSpec) {
-	    return $http.post(dataEndpoint + '/jobs', jobSpec)
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.post(url + '/jobs', jobSpec)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
+	    
 	}
 
 	function getJobs() {
-	    return $http.get(dataEndpoint + '/jobs')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/jobs')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getJob(id) {
-	    return $http.get(dataEndpoint + '/job/' + id)
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/job/' + id)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	//get a list of existing jobs, with latest one as the first one
 	function getLatestJobs() {
-	    return $http.get(dataEndpoint + '/jobs/latest')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/jobs/latest')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	//get a list of destinations
 	function getDestinations() {
-	    return $http.get(dataEndpoint + '/destinations')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/destinations')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	//get a list of sourceConfigs
 	function getSourceConfigs() {
-	    return $http.get(dataEndpoint + '/sourceconfig')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/sourceconfig')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function handleSuccess(response) {

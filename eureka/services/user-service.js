@@ -44,26 +44,28 @@
 
     function UserService($http, $q, ProxyService) {
 
-        var dataEndpoint = ProxyService.getDataEndpoint();
-
         return {
             getUser: getCurrentUser,
             getRole: getRole
         };
 
         function getRole(roleId) {
-            return $http.get(dataEndpoint+'/roles/' + roleId).then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/roles/' + roleId).then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function getCurrentUser() {
-            return $http.get(dataEndpoint+'/users/me')
-		.then(handleSuccess, handleError)
-		.then(function(userInfo) {
-		    return $q.all(_.map(userInfo.roles, getRole)).then(function(roles) {
-			userInfo.roles = roles;
-			return new User(userInfo);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/users/me')
+		    .then(handleSuccess, handleError)
+		    .then(function(userInfo) {
+			return $q.all(_.map(userInfo.roles, getRole)).then(function(roles) {
+			    userInfo.roles = roles;
+			    return new User(userInfo);
+			}, handleError);
 		    }, handleError);
-		}, handleError);
+	    }, handleError);
         }
 
         function handleSuccess(response) {

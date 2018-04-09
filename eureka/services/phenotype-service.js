@@ -17,7 +17,6 @@
     PhenotypeService.$inject = ['$http', '$q', 'ProxyService'];
 
     function PhenotypeService($http, $q, ProxyService) {
-	var dataEndpoint = ProxyService.getDataEndpoint();
 	return ({
 	    getPhenotypeMessages: getPhenotypeMessages,
 	    getPhenotypeRoot: getPhenotypeRoot,
@@ -58,60 +57,76 @@
 	}
 	
 	function getPhenotypeRoot() {
-	    return $http.get(dataEndpoint + '/phenotypes?summarize=true')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/phenotypes?summarize=true')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function createPhenotype(newObject) {
-
-	    return $http.post(dataEndpoint + '/phenotypes', newObject)
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.post(url + '/phenotypes', newObject)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function updatePhenotype(updateObject) {
-
-	    return $http.put(dataEndpoint + '/phenotypes/' + updateObject.id, updateObject)
-		.then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.put(url + '/phenotypes/' + updateObject.id, updateObject)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getPhenotype(key, summarize) {
 	    if (summarize === undefined) {
 		summarize = false;
 	    }
-	    return $http.get(dataEndpoint + '/phenotypes/' + key + '?summarize=' + summarize)
-		.then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/phenotypes/' + key + '?summarize=' + summarize)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function removePhenotype(id) {
-	    return $http['delete'](dataEndpoint + '/phenotypes/' + id)
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http['delete'](url + '/phenotypes/' + id)
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getTimeUnits() {
-	    return $http.get(dataEndpoint + '/timeunits')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		 return $http.get(url + '/timeunits')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getFrequencyTypes() {
-	    return $http.get(dataEndpoint + '/frequencytypes')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/frequencytypes')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getThresholdsOperators() {
-	    return $http.get(dataEndpoint + '/thresholdsops')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/thresholdsops')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getValueComparators() {
-	    return $http.get(dataEndpoint + '/valuecomps')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/valuecomps')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function getRelationOperators() {
-	    return $http.get(dataEndpoint + '/relationops')
-		.then(handleSuccess, handleError);
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/relationops')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
 	function handleSuccess(response) {

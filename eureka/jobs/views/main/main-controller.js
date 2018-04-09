@@ -21,7 +21,6 @@
 	    filesCompleted;
 	vm.radioData = 1;
 	vm.treeMultiDropZoneItems = [];
-	vm.dataEndpoint = ProxyService.getDataEndpoint();
 
 	vm.earliestDatePopup = {
 	    opened: false
@@ -65,12 +64,14 @@
 	    }();
 
 	    if (totalFiles > 0) {
-		angular.forEach(vm.sourceConfigPrompts, function (prompt) {
-		    if (prompt.fileInput) {
-			let fileInput = prompt.fileInput;
-			fileInput.opts.target = vm.dataEndpoint + '/file/upload/' + prompt.sourceConfig.id + '/' + prompt.option.name;
-			fileInput.upload();
-		    }
+		ProxyService.getDataEndpoint().then(function (url) {
+		    angular.forEach(vm.sourceConfigPrompts, function (prompt) {
+			if (prompt.fileInput) {
+			    let fileInput = prompt.fileInput;
+			    fileInput.opts.target = url + '/file/upload/' + prompt.sourceConfig.id + '/' + prompt.option.name;
+			    fileInput.upload();
+			}
+		    });
 		});
 	    } else {
 		_submitJob();

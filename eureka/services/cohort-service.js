@@ -17,8 +17,6 @@
     CohortService.$inject = ['$http', '$q', 'ProxyService'];
 
     function CohortService($http, $q, ProxyService) {
-
-        var dataEndpoint = ProxyService.getDataEndpoint();
 	
         return ({
             getCohorts: getCohorts,
@@ -31,40 +29,38 @@
         });
 
         function getCohorts() {
-
-            var type = 'COHORT';
-            return $http.get(dataEndpoint + '/destinations?type=' + type)
-                .then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		var type = 'COHORT';
+		return $http.get(url + '/destinations?type=' + type)
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function removeCohort(key) {
-
-            return $http['delete'](dataEndpoint + '/destinations/' + key)
-                .then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http['delete'](url + '/destinations/' + key)
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function getSystemElement(key) {
-
-            return $http.get(dataEndpoint + '/concepts/' + key + '?summary=true')
-                .then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/concepts/' + key + '?summary=true')
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function getCohort(cohortId) {
-            return $http.get(dataEndpoint + '/destinations/' + cohortId)
-                .then(handleSuccess, handleError);
-
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/destinations/' + cohortId)
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function getPhenotypes(cohort) {
-
-
             var cohorts = [];
 
             function traverse(node) {
-
                 if (node.left_node !== undefined) {
                     traverse(node.left_node);
                 }
@@ -82,7 +78,9 @@
 
             var promises = [];
             angular.forEach(cohorts, function(cohort) {
-                var promise = $http.get(dataEndpoint + '/concepts/' + cohort + '?summary=true');
+		var promise = ProxyService.getDataEndpoint().then(function(url) {
+		    return $http.get(url + '/concepts/' + cohort + '?summary=true');
+		}, handleError);
                 promises.push(promise);
 
             });
@@ -135,8 +133,10 @@
                 node = null;
             }
             newCohort.cohort.node = node;
-            return $http.post(dataEndpoint + '/destinations/', newCohort)
-                .then(handleSuccess, handleError);
+            return ProxyService.getDataEndpoint().then(function(url) {
+		$http.post(url + '/destinations/', newCohort)
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
 
@@ -191,8 +191,10 @@
             newCohort.id = cohort.id;
             newCohort.cohort.node = node;
 
-            return $http.put(dataEndpoint + '/destinations/', newCohort)
-                .then(handleSuccess, handleError);
+            return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.put(url + '/destinations/', newCohort)
+                    .then(handleSuccess, handleError);
+	    }, handleError);
         }
 
         function handleSuccess(response) {

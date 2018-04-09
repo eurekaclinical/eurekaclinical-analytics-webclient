@@ -13,53 +13,63 @@
         .module('eureka')
         .factory('ProxyService', ProxyService);
 
-    ProxyService.$inject = ['$http', '$q'];
+    ProxyService.$inject = ['$rootScope', '$http', '$q', 'ConfigFileService'];
 
-    function ProxyService($http, $q) {
-        var dataProtectedEndPoint = getProtectedEndpoint();
-	var dataEndpoint = getDataEndpoint();
-	var dataOpenEndpoint = getOpenEndpoint();
+    function ProxyService($rootScope, $http, $q, ConfigFileService) {
 
         return ({
             getSessionProperties: getSessionProperties,
 	    getSession: getSession,
 	    destroySession: destroySession,
-	    getAppProperties: getAppProperties,
 	    getDataEndpoint: getDataEndpoint,
-	    getProtectedEndpoint: getProtectedEndpoint,
-	    getOpenEndpoint: getOpenEndpoint
+	    getAppProperties: getAppProperties
         });
 
 	function getDataEndpoint() {
-	    return 'eureka-webapp/proxy-resource';
+	    return getOpenEndpoint().then(function(url) {
+		return url + '/proxy-resource';
+	    }, handleError);
 	}
 
 	function getProtectedEndpoint() {
-	    return 'eureka-webapp/protected';
+	    return getOpenEndpoint().then(function(url) {
+		return url + '/protected';
+	    }, handleError);
 	}
 
 	function getOpenEndpoint() {
-	    return 'eureka-webapp';
+	    return ConfigFileService.getConfig().then(
+		function(config) {
+		    return config.eurekaWebappUrl;
+		}, handleError);
 	}
 
 	function getSession() {
-	    return $http.get(dataProtectedEndPoint + '/get-session')
-		.then(handleSuccess, handleError);
+	    return getProtectedEndpoint().then(function(url) {
+		return $http.get(url + '/get-session')
+		    .then(handleSuccess, handleError);	
+	    });
 	}
 
 	function destroySession() {
-	    return $http.get(dataOpenEndpoint + '/destroy-session')
-		.then(handleSuccess, handleError);
+	    return getOpenEndpoint().then(function(url) {
+		return $http.get(url + '/destroy-session')
+		    .then(handleSuccess, handleError);
+	    });
 	}
 
         function getSessionProperties() {
-	    return $http.get(dataProtectedEndPoint + '/get-session-properties')
-                .then(handleSuccess, handleError);
+	    return getProtectedEndpoint().then(function(url) {
+		return $http.get(url + '/get-session-properties')
+                    .then(handleSuccess, handleError);
+	    });
         }
 
 	function getAppProperties() {
-	    return $http.get(dataEndpoint + '/appproperties/')
-		.then(handleSuccess, handleError);
+	    return getDataEndpoint().then(function(url) {
+		return $http.get(url + '/appproperties/')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
 	}
 
         function handleSuccess(response) {

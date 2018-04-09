@@ -82,10 +82,18 @@
 		    });
 	    }
 
+	    function getSession() {
+		ProxyService.getSession().then(function(user) {
+		    getAppProperties();
+		    getUser();
+		}, function() {
+		    getAppProperties();
+		});
+	    }
+
 	    function getUser() {
 		UserService.getUser().then(function(user) {
 		    $rootScope.user = user;
-		    getAppProperties();
 		    getRegistryUserMenuItems();
 		}, function() {
 		    getAppProperties();
@@ -104,7 +112,7 @@
 		    $rootScope.logoutUrl = data.logoutUrl;
 		    $rootScope.userWebappUrl = data.userWebappUrl; //temp solution
 		    $rootScope.eurekaWebappUrl = data.eurekaWebappUrl;
-		    getUser();
+		    getSession();
 		}, function(msg) {
 		    $rootScope.userVerficationPerformed = true;
 		});

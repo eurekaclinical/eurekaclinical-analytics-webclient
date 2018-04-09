@@ -65,19 +65,19 @@ gulp.task('webserver', function () {
 		cert: 'pki/cert.pem'
 	    },
 	    middleware: [
-		proxy('/eureka-webapp', {
+		proxy('/eurekaclinical-analytics-webapp', {
 		    target: 'https://localhost:8443',
 		    secure: false
 		}),
-		proxy('/eureka-services', {
+		proxy('/eurekaclinical-analytics-service', {
 		    target: 'https://localhost:8443',
 		    secure: false
 		}),
-		proxy('/eureka-protempa-etl', {
+		proxy('/eurekaclinical-protempa-service', {
 		    target: 'https://localhost:8443',
 		    secure: false
 		}),
-		proxy('/cas-server', {
+		proxy('/cas-mock', {
 		    target: 'https://localhost:8443',
 		    secure: false
 		}),

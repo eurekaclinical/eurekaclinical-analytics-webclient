@@ -12,16 +12,22 @@
 	.service('ConfigFileService',
 		 ['$http', '$q',
 		  function ($http, $q) {
+		      var data = null;
 		      return {
 			  getConfig: getConfig
 		      };
 
 		      function getConfig() {
-			  return $http.get('config.json')
-			      .then(handleSuccess, handleError);
+			  if (data !== null) {
+			      return $q.defer().promise.then(function() {return data});
+			  } else {
+			      return $http.get('config.json')
+				  .then(handleSuccess, handleError);
+			  }
 		      }
 
 		      function handleSuccess(response) {
+			  //data = response.data;
 			  return response.data;
 		      }
 
