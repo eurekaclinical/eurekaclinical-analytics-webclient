@@ -75,7 +75,6 @@
 		    .then(function(data) {
 			$rootScope.modes = data.appPropertiesModes;
 			$rootScope.links = data.appPropertiesLinks;
-			$rootScope.registration = data.appPropertiesRegistration;
 			$rootScope.userVerficationPerformed = true;
 		    }, function() {
 			sessionBroken();
@@ -110,7 +109,6 @@
 		.then(function(data) {
 		    $rootScope.service = data.webClientUrl;
 		    $rootScope.logoutUrl = data.logoutUrl;
-		    $rootScope.userWebappUrl = data.userWebappUrl; //temp solution
 		    $rootScope.eurekaWebappUrl = data.eurekaWebappUrl;
 		    getSession();
 		}, function(msg) {

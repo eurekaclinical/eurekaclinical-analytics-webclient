@@ -13,86 +13,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Getting Started</div>
-                    
-                        <div class="panel-body text-center" ng-show="userVerficationPerformed == false ">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h4><i class="fa fa-refresh fa-spin fa-2x"></i>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="panel-heading">Get Started</div>
 
-                        <div class="panel-body text-center" ng-show="userVerficationPerformed == true && !user">
-                            <div class="container-fluid">
-                                <div class="row" ng-switch="registration.registrationEnabled">
-                                    <div ng-switch-when="true">
-                                        <div class="col-xs-6">
-                                            <h4>Learn about Eureka!</h4>
-                                            <a ng-href="http://eurekaclinical.org/docs/analytics" target="eurekaclinical-analytics-help"
-                                               class="btn btn-primary btn-lg">
-                                                About Eureka!
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h4>Get an account</h4>
-                                            <a href="{{userWebappUrl}}/chooseaccounttype"
-                                               class="btn btn-primary btn-lg">
-                                                Register
-                                            </a>                                          
-                                        </div>
-                                    </div>
-                                    <div ng-switch-default>
-                                        <div class="col-xs-12">
-                                            <h4>Learn about Eureka!</h4>
-                                            <a ng-href="http://eurekaclinical.org/docs/analytics" target="eurekaclinical-analytics-help"
-                                               class="btn btn-primary btn-lg">
-                                                About Eureka!
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>        
-                    
-                        <div class="panel-body text-center" ng-show="userVerficationPerformed == true && user">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h4>Learn more about Eureka!</h4>
-                                        <a ng-href="http://eurekaclinical.org/docs/analytics" target="eurekaclinical-analytics-help"
-                                           class="btn btn-primary btn-lg">
-                                            About Eureka!
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>               
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Want to evaluate Eureka! at your institution?</div>
                     <div class="panel-body text-center">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h4>Contact us for options</h4>
-                                    <a ng-href="http://eurekaclinical.org/about-us" target="eurekaclinical-analytics-help"
-                                       class="btn btn-primary btn-lg">
-                                        Contact Us
-                                    </a>
-                                </div>
+                            <div class="col-xs-12">
+                                <h4>Learn about Eureka! Clinical Analytics</h4>
+                                <a ng-href="http://eurekaclinical.org/docs/analytics" target="eurekaclinical-analytics-help"
+                                    class="btn btn-primary btn-lg">
+                                         About Eureka!
+                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>        
+                </div>               
             </div>
         </div>
         <div class="row">
