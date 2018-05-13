@@ -1,16 +1,21 @@
 # Eureka! Clinical Analytics Web Client
-[Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
+[Georgia Clinical and Translational Science Alliance (Georgia CTSA)](http://www.georgiactsa.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
 ## What does it do?
 This project contains the web client for Eureka! Clinical
 Analytics. It is an angularjs single-page site.
 
-## Version 1.0 development series
+## Version 1.1 development series
 Latest release:
 [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient)
 
-## Version history
-No final releases yet. This code used to be in the eureka project.
+This version will link the user interface to the refactored backend Eureka! Clinical services.
+
+## Version 1.0.1
+A news item for the new Eureka! Clinical Analytics release on the homepage was omitted. This version adds it back.
+
+## Version 1.0
+Initial release
 
 ## Build requirements
 * [Oracle Java JDK 8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
