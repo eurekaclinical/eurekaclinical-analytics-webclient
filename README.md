@@ -5,11 +5,11 @@
 This project contains the web client for Eureka! Clinical
 Analytics. It is an angularjs single-page site.
 
-## Version 1.1 development series
 Latest release:
 [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient)
 
-This version will link the user interface to the refactored backend Eureka! Clinical services.
+## Version 1.1
+This version links the user interface to the refactored backend Eureka! Clinical services.
 
 ## Version 1.0.1
 A news item for the new Eureka! Clinical Analytics release on the homepage was omitted. This version adds it back.
