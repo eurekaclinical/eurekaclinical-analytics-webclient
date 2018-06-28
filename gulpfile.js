@@ -73,6 +73,10 @@ gulp.task('webserver', function () {
 		    target: 'https://localhost:8443',
 		    secure: false
 		}),
+		proxy('/eurekaclinical-phenotype-service', {
+		    target: 'https://localhost:8443',
+		    secure: false
+		}),
 		proxy('/eurekaclinical-protempa-service', {
 		    target: 'https://localhost:8443',
 		    secure: false
