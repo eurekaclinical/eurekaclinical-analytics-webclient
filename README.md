@@ -8,6 +8,9 @@ Analytics. It is an angularjs single-page site.
 Latest release:
 [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient)
 
+## Version 1.1.1
+This version fixes an error when clicking Edit on a phenotype with a percent sign in it.
+
 ## Version 1.1
 This version links the user interface to the refactored backend Eureka! Clinical services.
 
