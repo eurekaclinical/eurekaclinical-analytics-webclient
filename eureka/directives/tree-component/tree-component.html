@@ -29,7 +29,7 @@
 			<i class="fa fa-refresh fa-spin"></i> Loading...
 		</div>
 		<ol class="breadcrumb" ng-if="vm.tableParams">
-			<li class="breadcrumb-item" ng-repeat="x in vm.breadCrumbs"><a href ng-click="vm.setBreadCrumbs(x)">{{x.displayName}}</a></li>
+			<li class="breadcrumb-item" ng-repeat="x in vm.breadCrumbs"><a href ng-click="vm.setBreadCrumbs(x)">{{x.displayName + (x.displayName === x.key ? '' : ' (' + x.key + ')')}}</a></li>
 		      </ol>
 		      <div id="conceptTable" style="max-height: 50vh; overflow-y: auto;">
 		<table ng-table="vm.tableParams" class="table" show-filter="true">
@@ -38,10 +38,10 @@
 				<tr ng-repeat="user in $data" class="animate">
 					<td>
 						<span ng-if="user.parent === false">
-							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName}}
+							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName + (user.displayName === user.key ? '' : ' (' + user.key + ')')}}
 						</span>
 						<a title="Edit" ng-click="vm.selectNode(user) " ng-if="user.parent===true" style="cursor: pointer;">
-							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName}}
+							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName + (user.displayName === user.key ? '' : ' (' + user.key + ')')}}
 						</a>
 					</td>
 					<td>
