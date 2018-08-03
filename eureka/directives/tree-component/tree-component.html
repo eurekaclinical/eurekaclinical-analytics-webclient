@@ -35,7 +35,7 @@
 		<table ng-table="vm.tableParams" class="table" show-filter="true">
 			<thead class="hidden"/>
 			<tbody>
-				<tr ng-repeat="user in $data" class="animate">
+				<tr ng-repeat="user in $data | orderBy: 'key'" class="animate">
 					<td>
 						<span ng-if="user.parent === false">
 							<i ng-class="{true: 'fa fa-folder-o', false: 'glyphicon glyphicon-file'}[user.parent]" aria-hidden="true"></i> {{user.displayName + (user.displayName === user.key ? '' : ' (' + user.key + ')')}}
