@@ -62,7 +62,7 @@
 		<table ng-table="vm.tableParamsUser" class="table" show-filter="true">
 			<thead class="hidden"/>
 			<tbody>
-				<tr ng-repeat="user1 in $data" class="animate">
+				<tr ng-repeat="user1 in $data | orderBy: 'key' " class="animate">
 					<td>
 						<span>
 							<i class="glyphicon glyphicon-file" aria-hidden="true"></i> {{user1.displayName}}
