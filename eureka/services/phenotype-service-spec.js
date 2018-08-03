@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var ProxyService, $httpBackend;
+    var ProxyService, $httpBackend, ConfigFileService;
 
     registerSetup();
     registerTeardown();
@@ -18,7 +18,7 @@
                 blah: 'test'
             };
 	    $httpBackend.whenGET(
-		'https://localhost:8000/cas-server/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
+		'https://localhost:8000/cas-mock/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
                 .respond(userElements);
 	});
 
@@ -30,7 +30,7 @@
     });
 
     describe('getPhenotypeRoot', function() {
-        var userElements, PhenotypeService;
+        var userElements, registryUserMenuItems, PhenotypeService;
 
 	beforeEach(inject(function(_PhenotypeService_) {
 	    PhenotypeService = _PhenotypeService_;
@@ -41,7 +41,7 @@
                 blah: 'test'
             };
 	    $httpBackend.whenGET(
-		'https://localhost:8000/cas-server/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
+		'https://localhost:8000/cas-mock/serviceValidate?service=http:%2F%2Flocalhost:9876%2Fcontext.html')
                 .respond(userElements);
 	});
 
@@ -49,9 +49,8 @@
             userElements = {
                 blah: 'test'
             };
-            $httpBackend.whenGET('eureka-webapp/proxy-resource/phenotypes?summarize=true')
-                .respond(userElements);
-	    
+            $httpBackend.whenGET('https://localhost:8443/eurekaclinical-analytics-webapp/proxy-resource/phenotypes?summarize=true')
+                .respond(userElements); 
         });
 
         it('should get the user phenotypes', function() {
@@ -69,13 +68,23 @@
 	    module('eureka');
 	});
 
-	beforeEach(inject(function(_ProxyService_, _$httpBackend_) {
+	beforeEach(inject(function(_ProxyService_, _$httpBackend_, _ConfigFileService_) {
 	    ProxyService = _ProxyService_;
 	    $httpBackend = _$httpBackend_;
+	    ConfigFileService = _ConfigFileService_;
 	}));
 
 	beforeEach(function() {
-	    $httpBackend.whenGET('eureka-webapp/proxy-resource/appproperties/')
+	    $httpBackend.whenGET('config.json')
+		.respond({
+		    casLoginUrl: 'https://localhost:8443/cas-mock/login',
+		    logoutUrl: 'https://localhost:8443/cas-mock/logout',
+		    eurekaWebappUrl: 'https://localhost:8443/eurekaclinical-analytics-webapp'
+		});
+	});
+
+	beforeEach(function() {
+	    $httpBackend.whenGET('https://localhost:8443/eurekaclinical-analytics-webapp/proxy-resource/appproperties/')
 		.respond({
 		    appPropertiesModes: {},
 		    appPropertiesLinks: {},
@@ -84,13 +93,13 @@
 	});
 
 	beforeEach(function() {
-	    $httpBackend.whenGET('eureka-webapp/destroy-session')
+	    $httpBackend.whenGET('https://localhost:8443/eurekaclinical-analytics-webapp/destroy-session')
 	    	.respond({});
 	});
 
 	beforeEach(function() {
-	    var getSessionResponse = '<html><head></head><body><script type="text/javascript">parent.postMessage(\'OK\', \'https://localhost:8443/eureka-webapp\');</script></body></html>';
-	    $httpBackend.whenGET('eureka-webapp/protected/get-session')
+	    var getSessionResponse = '<html><head></head><body><script type="text/javascript">parent.postMessage(\'OK\', \'https://localhost:8443/eurekaclinical-analytics-webapp\');</script></body></html>';
+	    $httpBackend.whenGET('https://localhost:8443/eurekaclinical-analytics-webapp/protected/get-session')
 		.respond(getSessionResponse);
 	});
 
@@ -99,18 +108,18 @@
 		id: 0,
 		username: 'superuser'
 	    };
-	    $httpBackend.whenGET('eureka-webapp/proxy-resource/users/me')
+	    $httpBackend.whenGET('https://localhost:8443/eurekaclinical-analytics-webapp/proxy-resource/users/me')
 		.respond(meResponse);
 	});
 
 	beforeEach(function() {
-	    $httpBackend.whenGET('config.json')
-		.respond({
-		    casLoginUrl: 'https://localhost:8443/cas-server/login',
-		    logoutUrl: 'https://localhost:8443/cas-server/logout',
-		    eurekaWebappUrl: 'https://localhost:8000/eureka-webapp'
-		});
+	    var registryUserMenuItems = [];
+	    $httpBackend.whenGET(
+		'https://localhost:8443/eurekaclinical-analytics-webapp/proxy-resource/components?type=WEBAPP&type=EXTERNAL')
+                .respond(registryUserMenuItems);
 	});
+
+	
     }
 
     function registerTeardown() {

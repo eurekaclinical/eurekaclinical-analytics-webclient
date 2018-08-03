@@ -1,16 +1,24 @@
 # Eureka! Clinical Analytics Web Client
-[Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
+[Georgia Clinical and Translational Science Alliance (Georgia CTSA)](http://www.georgiactsa.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
 ## What does it do?
 This project contains the web client for Eureka! Clinical
 Analytics. It is an angularjs single-page site.
 
-## Version 1.0 development series
 Latest release:
 [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient)
 
-## Version history
-No final releases yet. This code used to be in the eureka project.
+## Version 1.1.1
+This version fixes an error when clicking Edit on a phenotype with a percent sign in it.
+
+## Version 1.1
+This version links the user interface to the refactored backend Eureka! Clinical services.
+
+## Version 1.0.1
+A news item for the new Eureka! Clinical Analytics release on the homepage was omitted. This version adds it back.
+
+## Version 1.0
+Initial release
 
 ## Build requirements
 * [Oracle Java JDK 8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
@@ -19,18 +27,18 @@ No final releases yet. This code used to be in the eureka project.
 ## Runtime requirements
 * Any web browser that is supported by AngularJS version 1.5 (see
   https://docs.angularjs.org/misc/faq).
-* `eureka-webapp` version 3.0-Alpha-23 from
-  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eureka-webapp/3.0-Alpha-23/eureka-webapp-3.0-Alpha-23.war,
+* `eurekaclinical-analytics-webapp` version 1.0 from
+  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eurekaclinical-analytics-webapp/1.0/eurekaclinical-analytics-webapp-1.0.war,
   accessible over the internet from your web browser. See
-  https://github.com/eurekaclinical/eureka for installation instructions.
-* `eureka-services` version 3.0-Alpha-23 from
-  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eureka-webapp/3.0-Alpha-23/eureka-webapp-3.0-Alpha-23.war,
+  https://github.com/eurekaclinical/eurekaclinical-analytics-webapp for installation instructions.
+* `eurekaclinical-analytics-service` version 1.0 from
+  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eurekaclinical-analytics-service/1.0/eurekaclinical-analytics-service-1.0.war,
   accessible over the internet from your web browser. See
-  https://github.com/eurekaclinical/eureka for installation instructions.
-* `eureka-protempa-etl` version 3.0-Alpha-23 from
-  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eureka-webapp/3.0-Alpha-23/eureka-webapp-3.0-Alpha-23.war,
+  https://github.com/eurekaclinical/eurekaclinical-analytics-service for installation instructions.
+* `eurekaclinical-protempa-service` version 1.0.1 from
+  https://oss.sonatype.org/content/groups/public/org/eurekaclinical/eurekaclinical-protempa-service/1.0.1/eurekaclinical-protempa-service-1.0.1.war,
   accessible over the internet from your web browser. See
-  https://github.com/eurekaclinical/eureka for installation
+  https://github.com/eurekaclinical/eurekaclinical-protempa-service for installation
   instructions.
 
 ## Building it
@@ -50,16 +58,16 @@ distribution, execute `mvn install -Pdist`.
 To run the web client on your machine for testing purposes, do the
 following:
 
-1. Clone the [eureka](https://github.com/eurekaclinical/eureka)
+1. Clone the [eurekaclinical-analytics-webapp](https://github.com/eurekaclinical/eurekaclinical-analytics-webapp)
 project from GitHub, and execute `mvn clean install`
-followed by `mvn tomcat7:run` in the root directory of the eureka
+followed by `mvn process-resources cargo:run -Ptomcat` in the root directory of the
 project on the command line to run the server-side Eureka! Clinical
 Analytics code in embedded tomcat. The backend services must be
 listening on port 8443, which is the default.
 2. Back in the root directory of the web client project, execute
 `mvn clean install -Pwebserver`. It will open the web client in your
 default web browser at https://localhost:8000 in an embedded web
-server. You can leave the backend eureka code running while you
+server. You can leave the backend Eureka! Clinical Analytics code running while you
 repeatedly build and run the web client.
 
 ## Installation
@@ -79,7 +87,7 @@ server. It supports specifying the following options:
   `https://localhost:8000/cas-server/logout`, which logs the user out
   of CAS.
 * `eurekaWebappUrl`: The URL for eureka-webapp. The default value is
-  `https://localhost:8000/eureka-webapp`.
+  `https://localhost:8000/eurekaclinical-analytics-webapp`.
 
 Specify the options as properties of a single JSON object. See the
 default `config.json` file in the root directory of this project for a
