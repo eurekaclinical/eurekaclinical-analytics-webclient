@@ -70,12 +70,7 @@
 		</div>  
 
 		<div class="form-group">
-			<label class="radio-inline">
-				<input type="radio" name="updateData" ng-model="jobs.radioData" ng-value="false" required>Replace Data
-			</label>
-			<label class="radio-inline">
-				<input type="radio" name="updateData" ng-model="jobs.radioData" ng-value="true">Update Data
-			</label> 
+		  <select class="form-control" ng-model="jobs.jobMode" ng-options="j.id as j.description for j in jobs.jobModes" required />
 		</div>
 	</fieldset>
 	<fieldset id ="concepts">
