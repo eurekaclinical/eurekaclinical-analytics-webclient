@@ -16,7 +16,7 @@
 </div>
 <form id="uploadForm" name="uploadForm" novalidate angular-validator angular-validator-submit="jobs.submitJob()" role="form" method="POST" action="upload" enctype="multipart/form-data">
 	<fieldset>
-		<legend>Job Information</legend>
+		<legend>Job status</legend>
 		<table id="jobInformation" class="table table-responsive">
 			<thead>
 				<tr>
@@ -76,7 +76,7 @@
 	<fieldset id ="concepts">
 		<legend>Concepts</legend>
 		<div class="form-group">
-			<tree-multi-drop-zone ng-model="jobs.treeMultiDropZoneItems" is-required="true" display-error="jobs.displayTreeMultiDropZoneItemsError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-multi-drop-zone>
+			<tree-multi-drop-zone ng-model="jobs.treeMultiDropZoneItems" display-error="jobs.displayTreeMultiDropZoneItemsError" delete-modal-template-url="dropZoneDeleteModal.html"></tree-multi-drop-zone>
 		</div>                                
 	</fieldset>
 	<fieldset id ="dateRange">
