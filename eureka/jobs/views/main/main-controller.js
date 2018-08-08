@@ -87,7 +87,7 @@
 		earliestDateSide: vm.earliestDateSide,
 		latestDate: vm.latestDate,
 		latestDateSide: vm.latestDateSide,
-		updateData: vm.radioData,
+		jobMode: vm.jobMode,
 		prompts: {
 		    id: vm.jobSourceConfig.id,
 		    dataSourceBackends: function () {
@@ -201,6 +201,16 @@
 		vm.sourceConfigs = data;
 
 		vm.jobSourceConfig = vm.sourceConfigs[0];
+	    }, displayLoadError);
+
+	JobService.getJobModes()
+	    .then(function (data) {
+		vm.jobModes = data.filter(item => item.name !== 'UNKNOWN');
+		angular.forEach(vm.jobModes, function(item) {
+		    if (item.default) {
+			vm.jobMode=item.id;
+		    }
+		});
 	    }, displayLoadError);
 
 	function routeChange(event, toState, toParams, fromState, fromParams) {

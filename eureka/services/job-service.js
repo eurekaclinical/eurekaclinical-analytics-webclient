@@ -24,7 +24,8 @@
 	    getJob: getJob,
 	    getLatestJobs: getLatestJobs,
 	    getDestinations: getDestinations,
-	    getSourceConfigs: getSourceConfigs
+	    getSourceConfigs: getSourceConfigs,
+	    getJobModes: getJobModes,
 	});
 
 	function submitJob(jobSpec) {
@@ -69,6 +70,13 @@
 	function getSourceConfigs() {
 	    return ProxyService.getDataEndpoint().then(function(url) {
 		return $http.get(url + '/sourceconfig')
+		    .then(handleSuccess, handleError);
+	    }, handleError);
+	}
+
+	function getJobModes() {
+	    return ProxyService.getDataEndpoint().then(function(url) {
+		return $http.get(url + '/jobmodes')
 		    .then(handleSuccess, handleError);
 	    }, handleError);
 	}
