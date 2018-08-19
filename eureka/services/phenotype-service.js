@@ -82,7 +82,7 @@
 		summarize = false;
 	    }
 	    return ProxyService.getDataEndpoint().then(function(url) {
-		return $http.get(url + '/phenotypes/' + key + '?summarize=' + summarize)
+		return $http.get(url + '/phenotypes/' + encodeURIComponent(key) + '?summarize=' + summarize)
 		    .then(handleSuccess, handleError);
 	    }, handleError);
 	}
