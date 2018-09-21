@@ -8,11 +8,22 @@ Analytics. It is an angularjs single-page site.
 Latest release:
 [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-analytics-webclient)
 
-## Version 1.1.1
-This version fixes an error when clicking Edit on a phenotype with a percent sign in it.
+## Version 2.0
+The job submission page provides experimental support for updating
+phenotypes in a destination database. There are also numerous bug
+fixes in the server-side services. On the client side, this version fixes an 
+error when clicking Edit on a phenotype with a percent sign in it.
+
 
 ## Version 1.1
-This version links the user interface to the refactored backend Eureka! Clinical services.
+The changes for this release are behind the scenes to support a
+revised server-side architecture that we're implementing. User profile
+and administration functions have completely moved into separate web
+clients that, if installed, are available from the user menu in the
+upper right corner of the screen.
+
+## Version 1.1.1
+This version fixes an error when clicking Edit on a phenotype with a percent sign in it.
 
 ## Version 1.0.1
 A news item for the new Eureka! Clinical Analytics release on the homepage was omitted. This version adds it back.
