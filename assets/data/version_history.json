@@ -2,7 +2,8 @@
     "versionHistory": [
 	{
 	    "releaseDate": "2018.09.21",
-	    "description": "Version 2 of the new webclient is out! The job submission page provides experimental support for updating phenotypes in a destination database. There are also numerous bug fixes in the server-side services."
+	    "description": "Version 2 of the new webclient is out! The job submission page provides experimental support for updating phenotypes in a destination database. There are also numerous bug fixes in the server-side services. On the client side, this version fixes an 
+error when clicking Edit on a phenotype with a percent sign in it."
 	},
 	{
 	    "releaseDate": "2018.06.21",
