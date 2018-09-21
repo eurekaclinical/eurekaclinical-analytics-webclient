@@ -1,8 +1,16 @@
 {
     "versionHistory": [
 	{
+	    "releaseDate": "2018.09.21",
+	    "description": "Version 2 of the new webclient is out! The job submission page provides experimental support for updating phenotypes in a destination database. There are also numerous bug fixes in the server-side services."
+	},
+	{
+	    "releaseDate": "2018.06.21",
+	    "description": "Version 1.1 of the new webclient is out! The changes for this release are behind the scenes to support a revised server-side architecture that we're implementing. User profile and administration functions have completely moved into separate web clients that, if installed, are available from the user menu in the upper right corner of the screen"
+	},
+	{
 	    "releaseDate": "2018.02.16",
-	    "description": "Version 3 is out! We rewrote the phenotype editing, cohort editing, and job submission screens. In addition, concept browsing is much faster and works better on tablet form factors."
+	    "description": "Version 1 of the new Eureka! Clinical Analytics web client is out! We rewrote the phenotype editing, cohort editing, and job submission screens. In addition, concept browsing is much faster and works better on tablet form factors."
 	},
         {
 	    "releaseDate": "2016.09.16",
