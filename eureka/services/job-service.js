@@ -69,7 +69,7 @@
 	//get a list of sourceConfigs
 	function getSourceConfigs() {
 	    return ProxyService.getDataEndpoint().then(function(url) {
-		return $http.get(url + '/sourceconfig')
+		return $http.get(url + '/sourceconfigs')
 		    .then(handleSuccess, handleError);
 	    }, handleError);
 	}
