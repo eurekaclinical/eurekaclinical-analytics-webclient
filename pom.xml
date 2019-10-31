@@ -18,7 +18,7 @@
 	<parent>
 		<groupId>org.eurekaclinical</groupId>
 		<artifactId>eurekaclinical-parent</artifactId>
-		<version>4-Alpha-7</version>
+		<version>4-Alpha-8-SNAPSHOT</version>
 	</parent>
 	
 	<scm>
@@ -90,6 +90,15 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<releaseProfiles>release-sign-artifacts,dist</releaseProfiles>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly/bin.xml</descriptor>
+					</descriptors>
 				</configuration>
 			</plugin>
 		</plugins>
