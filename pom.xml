@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eurekaclinical</groupId>
 	<artifactId>eurekaclinical-analytics-webclient</artifactId>
-	<version>2.1-Alpha-4</version>
+	<version>2.1-Alpha-5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Eureka! Clinical Analytics Web Client</name>
 	<description>Eureka! Clinical Analytics is a web application that
@@ -25,7 +25,7 @@
 		<developerConnection>scm:git:https://github.com/eurekaclinical/eurekaclinical-analytics-webclient.git</developerConnection>
 		<connection>scm:git:https://github.com/eurekaclinical/eurekaclinical-analytics-webclient.git</connection>
 		<url>https://github.com/eurekaclinical/eurekaclinical-analytics-webclient.git</url>
-		<tag>eurekaclinical-analytics-webclient-2.1-Alpha-4</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
