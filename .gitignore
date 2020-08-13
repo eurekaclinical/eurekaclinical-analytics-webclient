@@ -10,3 +10,4 @@ build
 bower_components
 npm-debug.log
 
+/package-lock.json
